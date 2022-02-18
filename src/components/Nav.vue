@@ -1,6 +1,13 @@
 <template>
     <nav>
-       <router-link to="/Products">Products</router-link>
+        <div>
+            <router-link to="/Products">Products</router-link>
+            <!-- <router-link to="/Products">APPAREL</router-link> -->
+        </div>
+        <div>
+            <input type="text">
+
+        </div>
     </nav>
 </template>
 
@@ -10,6 +17,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
+nav {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
 </style>
