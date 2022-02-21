@@ -1,6 +1,8 @@
 <template>
   <header>
-    <img src="@/assets/logo.svg" alt="sinus logo">
+    <router-link to="/">
+     <img src="@/assets/logo.svg" alt="sinus logo">
+    </router-link>
     <div>
       <h1>SINUS</h1>
       <p>SKATEBOARDS スケートボード</p>
@@ -19,7 +21,10 @@ export default {
     display: flex;
     height: 6rem;
     align-items: center;
-    background: url("../assets/skate-background.jpg"), rgba(255,255,255, 0.5);
+    background: url("../assets/img/header-index.jpg"), rgba(255,255,255, 0.5);
+    background-repeat: no-repeat;
+    background-position-y: 57%;
+    background-size: 100%;
     padding: 1.5rem;
   }
   div {
@@ -28,5 +33,13 @@ export default {
   img {
     height: 6rem;
     width: 6rem;
+  }
+  h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+  }
+  p {
+    font-size: 0.8rem;
   }
 </style>
