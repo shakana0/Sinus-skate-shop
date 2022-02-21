@@ -19,7 +19,10 @@ export default {
     display: flex;
     height: 6rem;
     align-items: center;
-    background: url("../assets/skate-background.jpg"), rgba(255,255,255, 0.5);
+    background: url("../assets/img/header-index.jpg"), rgba(255,255,255, 0.5);
+    background-repeat: no-repeat;
+    background-position-y: 57%;
+    background-size: 100%;
     padding: 1.5rem;
   }
   div {
