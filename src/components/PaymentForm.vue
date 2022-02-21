@@ -21,22 +21,7 @@
       <input type="text" placeholder="District" required />
       <input type="text" placeholder="Phone Number" required />
     </div>
-    <section class="icons-wrapper">
-      <div>
-        <input type="checkbox" />
-        <span class="material-icons">currency_pound </span>
-      </div>
-      <div>
-        <input type="checkbox" />
-        <span class="material-icons">currency_bitcoin </span>
-      </div>
-      <div>
-        <input type="checkbox" />
-        <span class="material-icons">currency_yuan</span>
-      </div>
-    </section>
-    <button>PROCEED TO PAYMENT</button>
-  </form>
+     </form>
 </template>
 
 <script>
@@ -53,8 +38,7 @@ export default {
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 form {
   margin: 2rem;
-  width: 450px;
-
+  width: 400px;
   h2 {
     margin-bottom: 2rem;
   }
@@ -72,32 +56,12 @@ form {
   }
   input {
     width: 100%;
-    padding: 1.1rem 0;
+    padding: 1.1rem 0 1.1rem .5rem;
+    border: 1px solid black;
   }
-
-  section {
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    div{
-      display: flex;
-      align-items: center;
-    }
-    input {
-      width: 50px;
-      padding: 1.1rem 0;
-    }
+  div input:nth-child(2) {
+    border-left: none;
   }
-
-  button {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: white;
-    padding: 1.2rem 0;
-    width: 100%;
-    background-color: #df0000;
-    border: none;
-    border-radius: 5px;
-  }
+ 
 }
 </style>
