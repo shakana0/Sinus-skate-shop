@@ -2,7 +2,6 @@
   <div id="app">
     <Header />
     <Nav />
-
     <router-view />
     <Footer />
   </div>
@@ -13,7 +12,7 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import Nav from "@/components/Nav.vue";
 export default {
-  components: { Header, Footer, Nav },
+  components: { Header, Footer, Nav},
 };
 // import { defineComponent } from "@vue/composition-api"
 // import { defineComponent } from "@vue/composition-api"
