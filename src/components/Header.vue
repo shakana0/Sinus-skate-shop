@@ -1,19 +1,10 @@
 <template>
   <header>
-    <p>Header</p>
-    <!-- <router-link to="/Profile">Profile</router-link> -->
+    <img src="@/assets/logo.svg" alt="sinus logo">
     <div>
-      <h1>
-        <router-link to="/Profile">Sinus</router-link>
-      </h1>
+      <h1>SINUS</h1>
+      <p>SKATEBOARDS スケートボード</p>
     </div>
-    
-    <h1>
-      Sinus
-    </h1>
-    <nav>
-       <router-link to="/Products">Products</router-link>
-    </nav>
   </header>
 </template>
 
@@ -24,10 +15,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-header{
-  display: flex;
-}
-  a{
-    background: black;
+  header {
+    display: flex;
+    height: 6rem;
+    align-items: center;
+    background: url("../assets/skate-background.jpg"), rgba(255,255,255, 0.5);
+    padding: 1.5rem;
+  }
+  div {
+    margin-left: 1.5rem;
+  }
+  img {
+    height: 6rem;
+    width: 6rem;
   }
 </style>
