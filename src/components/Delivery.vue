@@ -27,18 +27,9 @@
       </div>
     </section>
     <section class="icons-wrapper">
-      <div>
-        <input type="checkbox" />
-        <img src="@/assets/icons/logos_mastercard.png" width="40px" alt="" />
-      </div>
-      <div>
-        <input type="checkbox" />
-        <img src="@/assets/icons/visa-color.png" width="40px" alt="" />
-      </div>
-      <div>
-        <input type="checkbox" />
-        <img src="@/assets/icons/american-color.png" width="40px" alt="" />
-      </div>
+      <img src="@/assets/icons/logos_mastercard.png" width="40px" alt="" />
+      <img src="@/assets/icons/visa-color.png" width="40px" alt="" />
+      <img src="@/assets/icons/american-color.png" width="40px" alt="" />
     </section>
     <button>BUY NOW</button>
   </form>
@@ -67,18 +58,9 @@ form {
   }
   section.icons-wrapper {
     display: flex;
+    align-items: center;
     justify-content: space-around;
-    margin: 0;
-    div {
-      display: flex;
-      align-items: center;
-      border: none;
-      width: 100%;
-    }
-    input {
-      width: 50px;
-      padding: 1.1rem 0;
-    }
+    margin: 2rem 0;
   }
   button {
     font-size: 1.5rem;
