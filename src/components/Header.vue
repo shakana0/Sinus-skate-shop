@@ -1,6 +1,8 @@
 <template>
   <header>
-    <img src="@/assets/logo.svg" alt="sinus logo">
+    <router-link to="/">
+     <img src="@/assets/logo.svg" alt="sinus logo">
+    </router-link>
     <div>
       <h1>SINUS</h1>
       <p>SKATEBOARDS スケートボード</p>
