@@ -82,6 +82,7 @@ export default {
     cursor:pointer;
     color: #fff;
     border: none;
+    border-radius: 5px;
   }
   button:hover{
       background-color: #E18C8C;
