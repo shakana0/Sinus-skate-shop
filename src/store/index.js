@@ -6,10 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state:{
-    products : {
-      skateboard: "",
-
-    }
+    products :[]
   },
   mutations: {
     saveItems(state, items){
@@ -18,8 +15,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getItems(context){
-      const response = await api.getItems(1);
+    async getItems(context,data){
+      const response = await api.getItems(data);
       context.commit("saveItems", response.data);
     }
   },
