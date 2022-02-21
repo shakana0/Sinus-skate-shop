@@ -10,16 +10,20 @@
     <Header/>
     <Nav/>
     <router-view />
+    <Product/>
+    <LogIn/>
     <Footer/>
   </div>
 </template>
 
 <script>
+import LogIn from "@/components/LoginModal.vue"
+import Product from "@/components/ProductCard.vue"
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
 import Nav from "@/components/Nav.vue"
 export default{
-  components:{Header,Footer,Nav}
+  components:{Header,Footer,Nav,Product,LogIn}
 }
 // import { defineComponent } from "@vue/composition-api"
 // import { defineComponent } from "@vue/composition-api"
