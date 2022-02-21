@@ -1,15 +1,16 @@
 <template>
-<div>
-</div>
-  
+  <main>
+    <router-link to="/"><button>Home</button> </router-link>
+    <PaymentForm />
+  </main>
 </template>
 
 <script>
-export default {
+import PaymentForm from "@/components/PaymentForm.vue";
 
-}
+export default {
+  components: { PaymentForm },
+};
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
