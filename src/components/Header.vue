@@ -34,4 +34,12 @@ export default {
     height: 6rem;
     width: 6rem;
   }
+  h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+  }
+  p {
+    font-size: 0.8rem;
+  }
 </style>
