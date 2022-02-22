@@ -1,8 +1,6 @@
 <template>
   <div class="categories-page">
-    <p>{{getQuery}}</p>
-    <button @click="axionItems">Get Items</button>
-    <button @click="test">Skateboard</button>
+    
   </div>
 </template>
 
@@ -21,24 +19,28 @@ export default {
   methods:{
     axionItems(){
       this.$store.dispatch('getItems');
-    },
-    test(){
-      this.$router.replace({name: 'ProductsPage', query: {category: "Skateboard"} })
     }
-    // ,
-    // callComputed(){
-    //   let data = this.getQuery;
-    //   return data;
-    // }
+    //  ,
+    //  callComputed(){
+    //    let data = this.getQuery;
+    //    return data;
+    //  }
   },
   created(){
-    let data = this.getQuery;
-    this.$store.dispatch('getItems', data);
+    let query = this.getQuery;
+    this.$store.dispatch('getItems', query);
     
   },
-  updated(){
-    let data = this.getQuery;
-    this.$store.dispatch('getItems', data);
+  beforeRouteUpdate(to, from){
+     if(from.query.Category != to.query.Category){
+        this.$route.query.Category = to.query.Category;
+     }
+    
+    console.log(to);
+    console.log(from);
+    //   console.log(from.query.Category);
+    // let query = this.getQuery;
+    // this.$store.dispatch('getItems', query);
   }
 }
 </script>
