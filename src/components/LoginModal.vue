@@ -22,7 +22,15 @@
       <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="email">
       <label for="Password">Password</label>
       <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="password">
+      <label for="zip">Zip</label>
+      <input class="input-field" type="Number" id="zip" placeholder="Zip" required v-model="Zip">
+      <label for="city">City</label>
+      <input class="input-field" type="text" id="city" placeholder="City" required v-model="City">
+      <label for="street">Street</label>
+      <input class="input-field" type="text" id="street" placeholder="Street" required v-model="Street">
+      
       <button class="submit-button">Register</button>
+      
     </form>
     <div v-if="!isloggedIn" class="Toogle-container">
       <p class="toogle-text">Already have an account?</p>
@@ -44,7 +52,10 @@ export default {
       password: "",
       isloggedIn : "",
       firstName : "",
-      lastName: ""
+      lastName: "",
+      Zip: "",
+      City: "",
+      Street : "",
     }
   },
   methods:{

@@ -1,7 +1,9 @@
 <template>
     <nav>
         <div>
-            <router-link to="/Products" class="product-link">Products</router-link>
+            <!-- <router-link to="/Products" class="product-link">Products</router-link> -->
+            <router-link :to="{path:'/Products',query:{Category:'Skateboard'}}" class="product-link">Skateboard</router-link>
+            <router-link :to="{path:'/Products',query:{Category:'Socks'}}" class="product-link">Socks</router-link>
             <!-- <router-link to="/Products">APPAREL</router-link> -->
         </div>
         <div class="icons-wrapper">
@@ -34,6 +36,11 @@ export default {
         toogleLogInModal(){
             this.showLogInModal = !this.showLogInModal;
         }
+        // ,
+        // addQuerySkateBoard(){
+        //      this.$router.replace({name: 'ProductsPage', query: {category: "Skateboard"} })
+        // }
+
     }
 }
 </script>
