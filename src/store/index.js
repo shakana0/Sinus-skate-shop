@@ -16,7 +16,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getItems(context,query){
+    async getItems(context, query){
       console.log(query);
       const response = await api.getItems(query);
       context.commit("saveItems", response.data);

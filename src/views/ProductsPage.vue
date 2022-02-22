@@ -18,7 +18,7 @@ export default {
   },
   methods:{
     axionItems(){
-      this.$store.dispatch('getItems');
+      // this.$store.dispatch('getItems');
     }
     //  ,
     //  callComputed(){
@@ -27,20 +27,15 @@ export default {
     //  }
   },
   created(){
-    let query = this.getQuery;
+    let query = this.$route.query.Category.toLowerCase();
     this.$store.dispatch('getItems', query);
     
-  },
-  beforeRouteUpdate(to, from){
-     if(from.query.Category != to.query.Category){
-        this.$route.query.Category = to.query.Category;
-     }
-    
-    console.log(to);
-    console.log(from);
-    //   console.log(from.query.Category);
-    // let query = this.getQuery;
-    // this.$store.dispatch('getItems', query);
+  }
+  ,
+  beforeRouteUpdate(to, from, next){
+    const query = to.query.Category.toLowerCase()
+    this.$store.dispatch('getItems', query);
+    next()
   }
 }
 </script>
