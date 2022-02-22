@@ -25,6 +25,4 @@ export default {
 <style lang="scss">
 @import "./assets/styles/reset";
 @import "./assets/styles/fonts";
-
-
 </style>
