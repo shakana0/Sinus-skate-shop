@@ -16,7 +16,7 @@
                 Skateboards
                 </router-link>
                 <router-link :to="{path:'/Products', 
-                query:{Category:'Wheels'}}" 
+                query:{Category:'Wheel'}}" 
                 class="product-link">
                 Wheels
                 </router-link>
@@ -32,12 +32,12 @@
             </button>
             <div class="drop-menu apparel" v-if="apparelMenu">
                 <router-link :to="{path:'/Products', 
-                query:{Category:'Hoodies'}}" 
+                query:{Category:'Hoodie'}}" 
                 class="product-link">
                 Hoodies
                 </router-link>
                 <router-link :to="{path:'/Products', 
-                query:{Category:'T-shirts'}}" 
+                query:{Category:'Tshirt'}}" 
                 class="product-link">
                 T-shirts
                 </router-link>
@@ -47,7 +47,7 @@
                 Socks
                 </router-link>
                 <router-link :to="{path:'/Products', 
-                query:{Category:'Caps'}}" class="product-link">
+                query:{Category:'Cap'}}" class="product-link">
                 Caps
                 </router-link>
                 <router-link :to="{path:'/Products', 
@@ -110,8 +110,8 @@ nav {
     max-height: 3rem;
 }
 // .product-link {
-//     font-size: 1.2rem;
-//     align-self: center;
+//     font-size: .8rem;
+//     // align-self: center;
 // }
 .products-nav {
     display: flex;
@@ -145,7 +145,7 @@ nav {
     border-radius: 3px;
     // box-shadow:  2px 2px 2px 2px rgba(50,50,50,0.25), 1rem 1rem 1rem 1rem rgba(0,0,0,0.85);
         a {
-            font-size: 1.2rem;
+            font-size: 1rem;
             padding: 0.5rem;
         }
         &.skate {
