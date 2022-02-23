@@ -21,7 +21,7 @@ export default {
     display: flex;
     height: 6rem;
     align-items: center;
-    background: url("../assets/img/header-index.jpg"), rgba(255,255,255, 0.5);
+    background: url("../assets/img/header-index3.jpg"), rgba(255,255,255, 0.5);
     background-repeat: no-repeat;
     background-position-y: 57%;
     background-size: 100%;
@@ -37,9 +37,11 @@ export default {
   h1 {
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
-    font-size: 3rem;
+    font-size: 3.6rem;
+    line-height: 0.8;
   }
   p {
     font-size: 0.8rem;
+    color: black;
   }
 </style>
