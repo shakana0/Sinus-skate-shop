@@ -1,29 +1,36 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import * as api from "@/api"
+import * as api from "@/api";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state:{
-    products: []
+  state: {
+    products: [],
   },
   mutations: {
-    saveItems(state, items){
-      state.products.push(items);
-    }
+    saveItems(state, items) {
+      state.products.push(...items);
+    },
   },
   actions: {
-    async getItems(context, query){
-      // Om products i state har en kategori som är samma som query 
-      // vars längd på värde är mindre än 1 (är tom/finns ej). Om den inte finns gör vi API-anropet.
-      if(context.state.products.filter(category => category[query]).length < 1){
+    async getItems(context, query) {
+      if (
+        !context.state.products.find((product) => product.category == query)
+      ) {
         const response = await api.getItems(query);
-        context.commit("saveItems", {[query]: response.data.products});
+        context.commit("saveItems", response.data.products);
       } else {
-        console.log("hej")
+        console.log("den finns redan");
       }
-    }
+    },
+  },
+  getters: {
+    filterProducts(state) {
+      return function(category){
+        return state.products.filter((products) => products.category == category)
+      }
+    },
   },
   modules: {},
 });
