@@ -1,13 +1,14 @@
 <template>
   <article class="product">
-    <img class="product-image" src="" alt="product">
-    <h2 class="product-title">Title</h2>
-    <p class="product-price">Price</p>
+    <img class="product-image" :src="'http://localhost:5000/images/' + product.imgFile" width="70px" alt="product">
+    <p class="product-title">{{product.title}}</p>
+    <p class="product-price">£{{product.price}}</p>
   </article>
 </template>
 
 <script>
 export default {
+  props:['product']
 
 }
 </script>
@@ -18,7 +19,7 @@ export default {
     background-color: #F9F7F7;
     max-width: 10rem;
     display: grid;
-    height: 15rem;
+    // height: 15rem;
     justify-items: center;
     grid-template-columns: 1fr;
     grid-template-rows:5fr repeat(2, 1fr);
