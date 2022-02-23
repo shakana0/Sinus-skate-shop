@@ -3,9 +3,9 @@
     <form v-if="isloggedIn" class="form" @submit.prevent="login">
       <h2 class="form-heading">Log in</h2>
       <label for="Email">Email</label>
-      <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="email">
+      <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="registrationData.email">
       <label for="Password">Password</label>
-      <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="password">
+      <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="registrationData.password">
       <button class="submit-button">Log in</button>
     </form>
     <div v-if="isloggedIn" class="Toogle-container">
@@ -19,15 +19,15 @@
       <label for="Last-name">Last name</label>
       <input class="input-field" type="text" id="Last-name" placeholder="Last name" required v-model="lastName">
       <label for="Email">Email</label>
-      <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="email">
+      <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="registrationData.email">
       <label for="Password">Password</label>
-      <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="password">
+      <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="registrationData.password">
       <label for="zip">Zip</label>
-      <input class="input-field" type="Number" id="zip" placeholder="Zip" required v-model="Zip">
+      <input class="input-field" type="Number" id="zip" placeholder="Zip" required v-model="registrationData.address.zip">
       <label for="city">City</label>
-      <input class="input-field" type="text" id="city" placeholder="City" required v-model="City">
+      <input class="input-field" type="text" id="city" placeholder="City" required v-model="registrationData.address.city">
       <label for="street">Street</label>
-      <input class="input-field" type="text" id="street" placeholder="Street" required v-model="Street">
+      <input class="input-field" type="text" id="street" placeholder="Street" required v-model="registrationData.address.street">
       
       <button class="submit-button">Register</button>
       
@@ -48,27 +48,45 @@ export default {
   },
   data(){
     return{
-      email: "",
-      password: "",
-      isloggedIn : "",
+      // email: "",
+      // password: "",
+      // isloggedIn : "",
+      // firstName : "",
+      // lastName: "",
+      // zip: "",
+      // city: "",
+      // street : "",'
       firstName : "",
       lastName: "",
-      Zip: "",
-      City: "",
-      Street : "",
+      isloggedIn : "",
+      registrationData:{
+        email: "",
+        password: "",
+        name: "",
+        address:{
+          zip: "",
+          city: "",
+          street : "",
+        }
+      }
+    }
+  },
+  computed:{
+    fullName(){
+      return this.firstName + " " + this.lastName;
     }
   },
   methods:{
     login(){
       console.log(this.email);
       console.log(this.password);
+      //this.$store.dispatch('handleLogIn', );
       //dispatch email and username
     },
     register(){
-      console.log(this.email);
-      console.log(this.password);
-      console.log(this.firstName);
-      console.log(this.lastName);
+      this.registrationData.name = this.fullName;
+      // console.log(this.registrationData);
+      this.$store.dispatch('handleRegistration', this.registrationData);
       //dispatch email, username , firstname, lastname
     },
     toogleIsLogin(){
@@ -77,7 +95,9 @@ export default {
       this.email = "";
       this.firstName = "";
       this.lastName = "";
+
     }
+
   },
   created(){
     this.isloggedIn = this.isLogIn;

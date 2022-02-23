@@ -23,7 +23,16 @@ export default new Vuex.Store({
       } else {
         console.log("hej")
       }
+    },
+    async handleRegistration(context, registrationObject){
+      const request = await  api.regiserUser(registrationObject);
+      console.log(request);
+    },
+    async handleLogIn(context, handleLogIn){
+      handleLogIn
+      context
     }
+    
   },
   modules: {},
 });
