@@ -1,45 +1,34 @@
 <template>
   <div class="categories-page">
-    
+    <ProductList />
   </div>
 </template>
 
 <script>
+import ProductList from "@/components/ProductList.vue";
 export default {
-  data(){
-    return{
-      productCategory : ""
-    }
+  components: { ProductList },
+  data() {
+    return {
+      productCategory: "",
+    };
   },
-  computed:{
-    getQuery(){
+  computed: {
+    getQuery() {
       return this.$route.query.Category.toLowerCase();
-    }
+    },
   },
-  methods:{
-    axionItems(){
-      // this.$store.dispatch('getItems');
-    }
-    //  ,
-    //  callComputed(){
-    //    let data = this.getQuery;
-    //    return data;
-    //  }
-  },
-  created(){
+  methods: {},
+  created() {
     let query = this.$route.query.Category.toLowerCase();
-    this.$store.dispatch('getItems', query);
-    
-  }
-  ,
-  beforeRouteUpdate(to, from, next){
-    const query = to.query.Category.toLowerCase()
-    this.$store.dispatch('getItems', query);
-    next()
-  }
-}
+    this.$store.dispatch("getItems", query);
+  },
+  beforeRouteUpdate(to, from, next) {
+    const query = to.query.Category.toLowerCase();
+    this.$store.dispatch("getItems", query);
+    next();
+  },
+};
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
