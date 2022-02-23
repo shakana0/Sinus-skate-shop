@@ -24,6 +24,15 @@ export default new Vuex.Store({
         console.log("den finns redan");
       }
     },
+
+    async handleRegistration(context, registrationObject){
+      const request = await  api.regiserUser(registrationObject);
+      console.log(request);
+    },
+    async handleLogIn(context, handleLogIn){
+      handleLogIn
+      context
+    }
   },
   getters: {
     filterProducts(state) {
