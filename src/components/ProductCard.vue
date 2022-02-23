@@ -7,8 +7,10 @@
 </template>
 
 <script>
+// import ProductModal from '@/components/ProductModal.vue'
 export default {
-  props:['product']
+  props:['product'],
+  // components:{ProductModal}
 
 }
 </script>
