@@ -1,7 +1,7 @@
 <template>
-  <article class="product">
-    <img class="product-image" :src="'http://localhost:5000/images/' + product.imgFile" width="70px" alt="product">
-    <p class="product-title">{{product.title}}</p>
+  <article class="product" >
+    <img class="product-image" :class="product.category" :src="'http://localhost:5000/images/' + product.imgFile" alt="product">
+    <p class="product-title" :class="product.category">{{product.title}}</p>
     <p class="product-price">£{{product.price}}</p>
   </article>
 </template>
@@ -17,11 +17,11 @@ export default {
 
 <style scoped lang="scss">
   .product{
-    padding: 2rem;
+    padding: 2rem 2rem; 
     background-color: #F9F7F7;
-    max-width: 10rem;
+    min-width: 10rem;
+    height: 20rem;
     display: grid;
-    // height: 15rem;
     justify-items: center;
     grid-template-columns: 1fr;
     grid-template-rows:5fr repeat(2, 1fr);
@@ -36,8 +36,37 @@ export default {
   }
   .product-title{
     grid-area: title;
+    font-weight: 700;
+    
   }
   .product-price{
     grid-area: price;
   }
+  .skateboard{
+    max-width: 70px;
+  }
+  .skateboard.product-title{
+    margin-bottom: 1rem;
+    min-width: 100%;
+    text-align: center;
+  }
+  .wheel,
+  .socks,
+  .hoodie, 
+  .totebag {
+    max-height: 180px;
+  }
+  .tshirt{
+    max-height: 220px;
+  }
+  .cap{
+    max-height: 150px;
+  }
+
+ 
+  
+
+  
+  
+
 </style>
