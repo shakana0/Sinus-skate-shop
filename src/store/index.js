@@ -36,6 +36,7 @@ export default new Vuex.Store({
       }
     },
 
+
     async handleRegistration(context, registrationObject){
       const request = await  api.regiserUser(registrationObject);
       request
@@ -60,9 +61,11 @@ export default new Vuex.Store({
 
   getters: {
     filterProducts(state) {
-      return function(category){
-        return state.products.filter((products) => products.category == category)
-      }
+      return function (category) {
+        return state.products.filter(
+          (products) => products.category == category
+        );
+      };
     },
   },
   modules: {},
