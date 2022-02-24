@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <Header />
-    <Nav />
-    <router-view />
-    <Footer />
+    <Header class="header" />
+    <Nav class="nav"/>
+    <router-view class="main"/>
+    <Footer class="footer" />
   </div>
 </template>
 
@@ -25,4 +25,27 @@ export default {
 <style lang="scss">
 @import "./assets/styles/reset";
 @import "./assets/styles/fonts";
+#app{
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 9rem 3rem auto 13rem;
+  grid-template-areas:
+  "header"
+  "nav"
+  "main"
+  "footer";
+}
+.header{
+  grid-area: header;
+}
+.main{
+  grid-area: main;
+}
+.nav{
+  grid-area: nav;
+}
+.footer{
+  grid-area: footer;
+}
 </style>

@@ -19,7 +19,7 @@ export default {
 <style scoped lang="scss">
   header {
     display: flex;
-    height: 6rem;
+    //height: 6rem;
     align-items: center;
     background: url("../assets/img/header-index3.jpg"), rgba(255,255,255, 0.5);
     background-repeat: no-repeat;
