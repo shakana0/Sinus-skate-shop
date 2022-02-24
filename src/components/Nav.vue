@@ -83,13 +83,13 @@ export default {
         return {
             showLogInModal : false,
             skateMenu: false,
-            apparelMenu: false
+            apparelMenu: false,
         }
     },
     methods:{
         toogleLogInModal(){
             this.showLogInModal = !this.showLogInModal;
-        }
+        },
         // ,
         // addQuerySkateBoard(){
         //      this.$router.replace({name: 'ProductsPage', query: {category: "Skateboard"} })
@@ -102,7 +102,7 @@ export default {
 <style scoped lang="scss">
 @import "../assets/styles/fonts.scss";
 nav {
-    padding: 0.6rem;
+    padding: 0.6rem 2rem 0.6rem 1rem;
     background-color: black;
     display: flex;
     justify-content: space-between;
@@ -134,6 +134,13 @@ nav {
             margin-left: 0.4rem;
         }
 }
+.menu-btn:hover{
+    color: #38D8C4;
+}
+.menu-btn:focus{
+    color: #38D8C4;
+}
+
 .drop-menu {
     display: flex;
     flex-direction: column;
@@ -141,19 +148,25 @@ nav {
     // top: 3rem;
     transform: translate(0, 2rem);
     background-color: rgba(0,0,0,0.95);
-    border: 2px solid rgba(50,50,50,0.5);
-    border-radius: 3px;
+    // border: 2px solid rgba(50,50,50,0.5);
+    // border-radius: 3px;
     // box-shadow:  2px 2px 2px 2px rgba(50,50,50,0.25), 1rem 1rem 1rem 1rem rgba(0,0,0,0.85);
         a {
             font-size: 1rem;
             padding: 0.5rem;
         }
         &.skate {
-             transform: translate(0, 2rem);
+             transform: translate(0.5rem, 2rem); 
+             padding-right: 3rem;                               
         }
         &.apparel {
-             transform: translate(6rem, 2rem);
+             transform: translate(6.1rem, 2rem);
+             padding-right: 5rem;
         }
+        a:hover{
+            color: #38D8C4;
+        }
+        
 }
 input {
     height: 1.2rem;
@@ -180,6 +193,9 @@ button{
 }
 .material-icons {
     color: white;
+}
+.material-icons:hover {
+    color:#38D8C4;
 }
 .login-Module{
     position:absolute;
