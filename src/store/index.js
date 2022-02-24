@@ -26,20 +26,22 @@ export default new Vuex.Store({
       }
     },
 
-    async handleRegistration(context, registrationObject){
-      const request = await  api.regiserUser(registrationObject);
+    async handleRegistration(context, registrationObject) {
+      const request = await api.regiserUser(registrationObject);
       console.log(request);
     },
-    async handleLogIn(context, handleLogIn){
-      handleLogIn
-      context
-    }
+    async handleLogIn(context, handleLogIn) {
+      handleLogIn;
+      context;
+    },
   },
   getters: {
     filterProducts(state) {
-      return function(category){
-        return state.products.filter((products) => products.category == category)
-      }
+      return function (category) {
+        return state.products.filter(
+          (products) => products.category == category
+        );
+      };
     },
   },
   modules: {},

@@ -1,7 +1,7 @@
 <template>
   <div class="product-wrapper">
     <article v-for="product in Allproducts" :key="product.id">
-      <ProductCard :product="product" />
+      <ProductCard :product="product" @sendCurrentProduct="sendProduct" />
     </article>
   </div>
 </template>
@@ -10,6 +10,11 @@
 import ProductCard from "@/components/ProductCard.vue";
 export default {
   components: { ProductCard },
+  methods: {
+    sendProduct(product) {
+      this.$emit("sendCurrentProduct", product);
+    },
+  },
   computed: {
     Allproducts() {
       return this.$store.getters.filterProducts(
@@ -20,12 +25,12 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-div.product-wrapper{
+div.product-wrapper {
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   grid-gap: 1rem 0;
-  margin:0 10rem;
+  margin: 0 10rem;
 }
 </style>

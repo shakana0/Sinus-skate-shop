@@ -1,24 +1,44 @@
 <template>
   <div class="categories-page">
-    <ProductList />
+    <ProductList @sendCurrentProduct="saveProduct" />
+    <Overlay :show="showOverlay">
+      <ProductModal :product="currentProduct" v-if="showModal"  @closeModal="closeModal" />
+    </Overlay>
   </div>
 </template>
 
 <script>
 import ProductList from "@/components/ProductList.vue";
+import ProductModal from "@/components/ProductModal.vue";
+import Overlay from "@/components/Overlay.vue";
 export default {
-  components: { ProductList },
+  components: { ProductList, ProductModal, Overlay },
   data() {
     return {
       productCategory: "",
+      currentProduct: {},
+      showOverlay: false,
+      showModal: false,
     };
+  },
+  methods: {
+    saveProduct(product) {
+      console.log(product);
+      this.currentProduct = product;
+      this.showModal = true;
+      this.showOverlay = true;
+    },
+    closeModal(){
+      this.showModal = false;
+      this.showOverlay = false;
+    }
   },
   computed: {
     getQuery() {
       return this.$route.query.Category.toLowerCase();
     },
   },
-  methods: {},
+
   created() {
     let query = this.$route.query.Category.toLowerCase();
     this.$store.dispatch("getItems", query);
