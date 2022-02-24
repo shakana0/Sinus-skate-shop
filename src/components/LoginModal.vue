@@ -6,6 +6,7 @@
       <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="registrationData.email">
       <label for="Password">Password</label>
       <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="registrationData.password">
+      <p class="error" v-if="loginError">Invalid credentials</p>
       <button class="submit-button">Log in</button>
     </form>
     <div v-if="isloggedIn" class="Toogle-container">
@@ -28,7 +29,7 @@
       <input class="input-field" type="text" id="city" placeholder="City" required v-model="registrationData.address.city">
       <label for="street">Street</label>
       <input class="input-field" type="text" id="street" placeholder="Street" required v-model="registrationData.address.street">
-      
+      <p class="error" v-if="registrationError">Invalid input</p>
       <button class="submit-button">Register</button>
       
     </form>
@@ -48,14 +49,6 @@ export default {
   },
   data(){
     return{
-      // email: "",
-      // password: "",
-      // isloggedIn : "",
-      // firstName : "",
-      // lastName: "",
-      // zip: "",
-      // city: "",
-      // street : "",'
       firstName : "",
       lastName: "",
       isloggedIn : "",
@@ -74,13 +67,18 @@ export default {
   computed:{
     fullName(){
       return this.firstName + " " + this.lastName;
+    },
+    loginError(){
+      return this.$store.state.errors.loginError
     }
   },
   methods:{
     login(){
-      console.log(this.email);
-      console.log(this.password);
-      //this.$store.dispatch('handleLogIn', );
+      const loginData = {
+        email: this.registrationData.email,
+        password: this.registrationData.password
+      }
+      this.$store.dispatch('handleLogIn',  loginData);
       //dispatch email and username
     },
     register(){
@@ -150,7 +148,9 @@ export default {
     margin-top: 0.4rem;
     padding: 0.3rem 0.5rem
   }
-  
+  .error {
+    color: #DF0000;
+  }
 }
   
   
