@@ -50,7 +50,7 @@ footer {
   padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
-  height: 13rem;
+  //height: 13rem;
   align-items: center;
  
   

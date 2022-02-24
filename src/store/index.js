@@ -19,7 +19,8 @@ export default new Vuex.Store({
         !context.state.products.find((product) => product.category == query)
       ) {
         const response = await api.getItems(query);
-        context.commit("saveItems", response.data.products);
+        //context.commit("saveItems", response.data.products);
+        context.commit("saveItems", response.data);
       } else {
         console.log("den finns redan");
       }
