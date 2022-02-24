@@ -22,8 +22,10 @@ export default {
 <style scoped lang="scss">
 div.product-wrapper{
   display: grid;
+  justify-items: center;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  grid-gap: 1rem;
+  grid-gap: 1rem 0;
+  margin:0 10rem;
 }
 </style>
