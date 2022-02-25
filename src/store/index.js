@@ -34,7 +34,8 @@ export default new Vuex.Store({
       }else{
         state.inCart.push({id: product.id, amount: 1})
         console.log(state.inCart)
-    },
+      }
+    },  
     checkRegistrationError(state, isError) {
       console.log(isError);
       state.errors.registrationError = isError
@@ -42,7 +43,6 @@ export default new Vuex.Store({
         state.isRegistered = true;
       }
     }
-    
   },
   actions: {
     async getItems(context, query) {
