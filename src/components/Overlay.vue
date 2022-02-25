@@ -2,7 +2,7 @@
   <div class="overlay" :class="{show}">
     <div class="fade-layer"></div>
     <div class="content">
-      <slot></slot> -
+      <slot></slot>
     </div>
   </div>
 </template>
