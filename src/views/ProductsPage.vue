@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     saveProduct(product) {
-      console.log(product);
+      // console.log(product);
       this.currentProduct = product;
       this.showModal = true;
       this.showOverlay = true;

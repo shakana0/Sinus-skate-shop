@@ -67,22 +67,23 @@
                 <p class="login-status" v-if="loggedIn">Your account</p>
                 <p class="login-status" v-else>Log in/register</p>
             </button>    
-            <button>
-                <span class="material-icons">
-                    shopping_cart
-                </span>
+            <button @click="toogleCartModal">
+                <span class="material-icons"> shopping_cart </span>
             </button>
         </div>
+        <ShoppingBag v-if="showCartModal" class="cart-modal"/>
         <LogInModal class="login-Module" v-if="showLogInModal && !loggedIn"/>
     </nav>
 </template>
 
 <script>
-import LogInModal from "@/components/LoginModal.vue"
+import LogInModal from "@/components/LoginModal.vue";
+import ShoppingBag from "@/components/ShoppingBag.vue";
 export default {
-    components:{LogInModal},
+    components: { LogInModal, ShoppingBag },
     data(){
         return {
+            showCartModal: false,
             showLogInModal : false,
             skateMenu: false,
             apparelMenu: false
@@ -90,7 +91,6 @@ export default {
     },
     methods:{
         toogleLogInModal(){
-            console.log(this.$router.currentRoute.path);
             this.showLogInModal = !this.showLogInModal;
         },
         goToProfile() {
