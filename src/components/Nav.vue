@@ -84,16 +84,16 @@
         <span class="material-icons"> shopping_cart </span>
       </button>
     </div>
-    <Cart v-if="showCartModal" class="cart-modal"/>
+    <ShoppingBag v-if="showCartModal" class="cart-modal"/>
     <LogInModal class="login-modal" v-if="showLogInModal" />
   </nav>
 </template>
 
 <script>
 import LogInModal from "@/components/LoginModal.vue";
-import Cart from "@/components/Cart.vue";
+import ShoppingBag from "@/components/ShoppingBag.vue";
 export default {
-  components: { LogInModal, Cart },
+  components: { LogInModal, ShoppingBag },
   data() {
     return {
       showLogInModal: false,
