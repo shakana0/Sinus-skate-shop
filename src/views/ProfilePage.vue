@@ -1,5 +1,7 @@
 <template>
-  <main></main>
+  <main>
+    <p>Your profile</p>
+  </main>
 </template>
 
 <script>

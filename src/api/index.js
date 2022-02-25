@@ -11,8 +11,16 @@ export async function getItems(category){
 }
 
 export async function regiserUser(userRegistrationData){
-    console.log(userRegistrationData);
-    axios.post('/register/', userRegistrationData);
+    return await axios.post('/register/', userRegistrationData)
+        .then((response) => {  
+            return response.status
+            
+        })
+        .catch((error) => {
+            if (error.response) {
+                return error.response.status  
+            }
+        });
 }
 export async function loginUser(loginData){
     return await axios.post('/auth/', loginData)

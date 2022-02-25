@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     user: {},
+    isRegistered: false,
     errors: {
       loginError: false,
       registrationError: false,
@@ -33,8 +34,15 @@ export default new Vuex.Store({
       }else{
         state.inCart.push({id: product.id, amount: 1})
         console.log(state.inCart)
+    },
+    checkRegistrationError(state, isError) {
+      console.log(isError);
+      state.errors.registrationError = isError
+      if(isError == false){
+        state.isRegistered = true;
       }
     }
+    
   },
   actions: {
     async getItems(context, query) {
@@ -47,10 +55,15 @@ export default new Vuex.Store({
         console.log("den finns redan");
       }
     },
-
-    async handleRegistration(context, registrationObject) {
-      const request = await api.regiserUser(registrationObject);
-      request;
+    async handleRegistration(context, registrationObject){
+      let request = await api.regiserUser(registrationObject);
+      if(request >= 300){
+        context.commit('checkRegistrationError', true);
+      }
+      else{
+        context.commit('checkRegistrationError', false);
+      }
+      // return request
     },
     async handleLogIn(context, loginObject) {
       const response = await api.loginUser(loginObject);
@@ -71,7 +84,6 @@ export default new Vuex.Store({
       context.commit("saveInCart", product);
     },
   },
-
   getters: {
     filterProducts(state) {
       return function (category) {
