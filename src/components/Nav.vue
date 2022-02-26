@@ -207,22 +207,27 @@ button {
 .material-icons:hover {
   color: #38d8c4;
 }
-.login-modal {
-  position: absolute;
-  left: 0;
+
+.login-modal,.cart-modal{
+  position:absolute;
   right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  top: 12rem;
 }
-.cart-modal {
-  position: absolute;
-  left: 65%;
+// .login-modal {
+//   position: absolute;
+//   left: 0;
 //   right: 0;
-  top: 5%;
-  bottom: 0;
-//   margin: auto;
-}
+//   top: 0;
+//   bottom: 0;
+// }
+// .cart-modal {
+//   position: absolute;
+//   left: 65%;
+// //   right: 0;
+//   top: 5%;
+//   bottom: 0;
+// //   margin: auto;
+// }
 .login-status {
     color: white;
     font-size: 0.6rem;

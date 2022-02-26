@@ -42,6 +42,12 @@ export default new Vuex.Store({
       if(isError == false){
         state.isRegistered = true;
       }
+    },
+    modifyRegistrationStatus(state, isRegistrated){
+      state.isRegistered = isRegistrated;
+    },
+    modifyUserState(state){
+      state.user = {};
     }
   },
   actions: {
@@ -83,6 +89,13 @@ export default new Vuex.Store({
     addToCart(context, product) {
       context.commit("saveInCart", product);
     },
+    getRegistrationStatus(context, isRegistered){
+      context.commit("modifyRegistrationStatus", isRegistered);
+    },
+    logout(context){
+      api.saveToken("");
+      context.commit("modifyUserState");
+    }
   },
   getters: {
     filterProducts(state) {

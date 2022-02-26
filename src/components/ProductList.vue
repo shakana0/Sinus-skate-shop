@@ -33,4 +33,22 @@ div.product-wrapper {
   grid-gap: 1rem 0;
   margin: 0 10rem;
 }
+@media only screen and (max-width: 1200px) {
+  div.product-wrapper{
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 6rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  div.product-wrapper{
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 2rem;
+  }
+}
+@media only screen and (max-width: 550px) {
+  div.product-wrapper{
+    grid-template-columns: repeat(1, 1fr);
+    margin: 0 1rem;
+  }
+}
 </style>
