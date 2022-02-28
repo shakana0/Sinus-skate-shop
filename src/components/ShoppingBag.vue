@@ -1,53 +1,64 @@
 <template>
   <main>
-    <h2>Shopping Bag</h2>
     <header>
-      <div class="headers">
-        <p>Product</p>
-        <div>
-          <p>Price</p>
-          <p>Amount</p>
-          <p>Sum</p>
+      <h2>Shopping Bag</h2>
+      <section>
+        <div class="headers">
+          <p>Product</p>
+          <div>
+            <p>Price</p>
+            <p>Amount</p>
+            <p>Sum</p>
+          </div>
         </div>
-      </div>
+      </section>
+      <article>
+        <section class="order" v-for="order in cartList" :key="order.id">
+          <!-- <img class="product-image" :class="product.category" :src="'http://localhost:5000/images/' + order.imgFile" alt="product"> -->
+          <!-- fetcha bilden -->
+          <!-- <p>{{ order.category }}</p> -->
+          <div>
+            <p>{{ order.category }}</p>
+            <p>{{ order.title }}</p>
+          </div>
+          <p>{{ order.price }}</p>
+          <div>
+            <span @click="addProduct(order)">+</span>
+            <p>{{ order.amount }}</p>
+            <span @click="removeProduct(order)">-</span>
+          </div>
+        </section>
+      </article>
     </header>
-    <article>
-       <section class="order" v-for="order in cartList" :key="order.id"> 
-        <!-- <img class="product-image" :class="product.category" :src="'http://localhost:5000/images/' + order.imgFile" alt="product"> -->
-        <!-- fetcha bilden -->
-         <p>{{ order.category }}</p>
-        <p>{{ order.title }}</p>
-        <p>{{order.price}}</p>
-        <p>{{order.amount}}</p>
-      </section> 
-    </article>
+    <section class="total-price">
+      <div>
+        <p>Total</p>
+        <p>£{{ getTotalPrice }}</p>
+      </div>
+      <router-link to="/Checkout">
+        <button>CHECK OUT</button>
+      </router-link>
+    </section>
   </main>
 </template>
 
 <script>
 export default {
+  methods: {
+    addProduct(order) {
+      return this.$store.dispatch("addToCart", order);
+    },
+    removeProduct(order){
+      return this.$store.dispatch('removeFromCart', order)
+    }
+  },
   computed: {
     cartList() {
-      console.log(this.$store.state.products)
-      // console.log(cartItem.id)
-        return this.$store.state.inCart.map( cartItem => ({
-        id: cartItem.id,
-        title: this.$store.state.products.find((product) => product.id == cartItem.id).title, 
-        imgFile: this.$store.state.products.find((product) => product.id == cartItem.id).imgFile,
-        amount: cartItem.amount
-      })
-      );
-    
+      return this.$store.getters.cart;
     },
-
-
-// return this.$store.state.inCart.map((item) =>
-//         this.$store.state.products.find((product) => product.id == item.id) 
-
-    //  cart(){
-    //    console.log('cart')
-    //   return this.$store.getters.cart
-    // },
+    getTotalPrice() {
+      return this.$store.getters.calcTotalPrice;
+    },
   },
 };
 </script>
@@ -56,8 +67,12 @@ export default {
 main {
   width: 370px;
   height: 480px;
+  overflow: scroll;
   border: 2px solid black;
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
   h2 {
     text-align: center;
@@ -79,6 +94,57 @@ main {
       display: flex;
       p {
         margin: 0 1rem;
+      }
+    }
+  }
+  article {
+    .order {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+
+      div p:first-child {
+        font-family: "Permanent Marker", cursive;
+      }
+      div:nth-child(3) {
+        display: flex;
+        justify-content: space-between;
+        width: 60px;
+
+        span {
+          text-align: center;
+          background-color: #38d8c4;
+          color: white;
+          width: 1.2rem;
+          height: 1.2rem;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .total-price {
+    display: flex;
+    flex-direction: column;
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem;
+
+      p {
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+    }
+    a {
+      align-self: center;
+
+      button {
+        font-weight: 600;
+        color: white;
+        padding: 0.6rem 1.3rem;
+        background-color: #df0000;
+        border: none;
+        border-radius: 5px;
       }
     }
   }
