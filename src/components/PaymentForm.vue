@@ -7,18 +7,18 @@
       <option value="">Denmark</option>
     </select>
     <div>
-      <input type="text" placeholder="Email" required />
-      <input type="text" placeholder="Zip Code" />
+      <input type="text" placeholder="Email" required v-model="formData.email"/>
+      <input type="text" placeholder="Zip Code" v-model="formData.address.zip"/>
     </div>
     <div>
-      <input type="text" placeholder="Name" required />
+      <input type="text" placeholder="Name" required v-model="formFirstName"/>
       <input type="text" placeholder="Lastname" required />
     </div>
     <div>
-      <input type="text" placeholder="Adress" required />
+      <input type="text" placeholder="Adress" required v-model="formData.address.street"/>
     </div>
     <div>
-      <input type="text" placeholder="District" required />
+      <input type="text" placeholder="District" required v-model="formData.address.city"/>
       <input type="text" placeholder="Phone Number" required />
     </div>
      </form>
@@ -28,9 +28,43 @@
 export default {
   methods: {
     sendForm() {
-      console.log("sent :)");
-    },
+      // this.$emit(formData)
+    }
   },
+  computed: {
+    // loggedInUser() {
+    //   return this.$store.state.user
+    // },
+    formFirstName() {
+      let fullName = ""
+      var firstName = ""
+      if(this.$store.state.user) {
+        fullName = this.$store.state.user.name
+        firstName = fullName.split(" ")[0]
+      }
+      // console.log(firstName[0])
+      return firstName
+      },
+      // return this.$store.state.user ? this.$store.state.user.name.split(' ')[0] : ""
+    // },
+    formData() {
+      // let loggedInUser = this.$store.state.user
+      // if(this.$store.state.user) {
+      //   let firstName = this.$store.state.user.name.split(' ')[0]
+      //   let lastName = this.$store.state.user.name.split(' ')[1]
+      // }
+      return {
+        "email": "", 
+        "password" : "",
+        "name": "",
+        "address": {
+          "city": "",
+          "street": "",
+          "zip": "",
+        }
+      }
+    }
+  }
 };
 </script>
 

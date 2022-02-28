@@ -9,12 +9,16 @@
 </template>
 
 <script>
+//  @formInfo="userData"
 import PaymentForm from "@/components/PaymentForm.vue";
 import CartBag from "@/components/CartBag.vue";
 import Delivery from "@/components/Delivery.vue";
 
 export default {
-  components: { PaymentForm, CartBag, Delivery }
+  components: { PaymentForm, CartBag, Delivery },
+  methods: {
+
+  }
 };
 </script>
 
