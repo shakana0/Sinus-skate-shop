@@ -25,17 +25,9 @@ export default new Vuex.Store({
     checkLoginError(state, isError) {
       state.errors.loginError = isError;
     },
-    saveInCart(state, product){
-      // state.inCart.push(product.id)
-      const cart = state.inCart.find((cartItem) => cartItem.id == product.id)
-      console.log(state.inCart)
-      if(cart){
-        cart.amount++
-      }else{
-        state.inCart.push({id: product.id, amount: 1})
-        console.log(state.inCart)
-      }
-    },  
+    saveInCart(state, product) {
+      state.inCart.push({ id: product.id, amount: 1 });
+    },
     checkRegistrationError(state, isError) {
       console.log(isError);
       state.errors.registrationError = isError
@@ -82,12 +74,28 @@ export default new Vuex.Store({
         context.commit("saveAutData", userData.data);
         context.commit("checkLoginError", false);
       }
-      // api.saveToken(response.data.token);
-      // const userData = await api.getUser();
-      // context.commit('saveAutData', userData.data);
     },
+    //kanske flytta till mutations//
+    
     addToCart(context, product) {
-      context.commit("saveInCart", product);
+      const cart = context.state.inCart.find(
+        (cartItem) => cartItem.id == product.id
+      );
+      if (cart) {
+        cart.amount++;
+      } else {
+        context.commit("saveInCart", product);
+      }
+    },
+    removeFromCart(context, product) {
+      const cart = context.state.inCart.find(
+        (cartItem) => cartItem.id == product.id
+      );
+      if (cart.amount > 1) {
+        cart.amount--;
+      } else {
+        context.state.inCart.splice(context.state.inCart.indexOf(cart), 1)
+      }
     },
     getRegistrationStatus(context, isRegistered){
       context.commit("modifyRegistrationStatus", isRegistered);
@@ -100,20 +108,23 @@ export default new Vuex.Store({
   getters: {
     filterProducts(state) {
       return function (category) {
+        console.log(category)
         return state.products.filter(
           (products) => products.category == category
         );
       };
     },
-    // cart(state){
-    //   console.log('hejsan')
-    //   return state.inCart.map( cartItem => ({
-    //     id: cartItem.id,
-    //     title: state.products[cartItem.id].title,
-    //     imgFile: state.products[cartItem.id].imgFile,
-    //     amount: cartItem.amount
-    //   }))
-    // }
+    cart(state) {
+      return state.inCart.map((cartItem) => ({
+        ...state.products.find((product) => product.id == cartItem.id),
+        amount: cartItem.amount,
+      }));
+    },
+    calcTotalPrice(state, getters) {
+      return getters.cart.reduce((accumulator, item) => {
+        return accumulator + item.amount * item.price;
+      }, 0);
+    },
   },
   modules: {},
 });

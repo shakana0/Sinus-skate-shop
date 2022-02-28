@@ -3,17 +3,17 @@
     <section class="delivery">
       <h2>DELIVERY</h2>
       <div>
-        <input type="radio" />
+        <input type="radio" name="delivery"/>
         <p>Standard home delivery</p>
-        <img src="@/assets/icons/fedex.png" width="40px" alt="Fedex icon" />
+        <img src="@/assets/icons/fedex.png" width="40px" alt="Fedex icon"/>
       </div>
       <div>
-        <input type="radio" />
+        <input type="radio" name="delivery"/>
         <p>Standard pick up location</p>
         <img src="@/assets/icons/ups.png" width="20px" alt="Fedex icon" />
       </div>
       <div>
-        <input type="radio" />
+        <input type="radio" name="delivery"/>
         <p>Parcel locker</p>
         <img src="@/assets/icons/dhl.png" width="40px" alt="Fedex icon" />
       </div>
@@ -21,7 +21,7 @@
     <section class="payment">
       <h2>PAYMENTS</h2>
       <div>
-        <input type="radio" />
+        <input type="radio" id="id" value="id" />
         <p>Pay with card</p>
         <span class="material-icons">credit_card</span>
       </div>
