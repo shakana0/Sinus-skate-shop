@@ -8,11 +8,11 @@
     </select>
     <div>
       <input type="text" placeholder="Email" required v-model="formData.email"/>
-      <input type="text" placeholder="Zip Code" v-model="formData.address.zip"/>
+      <input type="text" placeholder="Zip Code" v-model="formData.address.zip" />
     </div>
     <div>
-      <input type="text" placeholder="Name" required v-model="formFirstName"/>
-      <input type="text" placeholder="Lastname" required />
+      <input type="text" placeholder="Name" required v-model="formFirstName" />
+      <input type="text" placeholder="Lastname" required v-model="formLastName" />
     </div>
     <div>
       <input type="text" placeholder="Adress" required v-model="formData.address.street"/>
@@ -36,24 +36,23 @@ export default {
     //   return this.$store.state.user
     // },
     formFirstName() {
-      let fullName = ""
-      var firstName = ""
-      if(this.$store.state.user) {
-        fullName = this.$store.state.user.name
-        firstName = fullName.split(" ")[0]
-      }
+      // var fullName = ""
+      // var firstName = ""
+      // if(this.$store.state.user) {
+      //   fullName = this.$store.state.user.name
+      //   firstName = fullName.split(" ")[0]
+      // }
       // console.log(firstName[0])
-      return firstName
-      },
+      return this.$store.state.user ? this.$store.state.user.name.split(" ")[0] : ""
+    },
+    formLastName() {
+      return this.$store.state.user ? this.$store.state.user.name.split(" ")[1] : ""
+    },
       // return this.$store.state.user ? this.$store.state.user.name.split(' ')[0] : ""
     // },
     formData() {
-      // let loggedInUser = this.$store.state.user
-      // if(this.$store.state.user) {
-      //   let firstName = this.$store.state.user.name.split(' ')[0]
-      //   let lastName = this.$store.state.user.name.split(' ')[1]
-      // }
-      return {
+      let loggedInUser = {...this.$store.state.user}
+      return this.$store.state.user ? loggedInUser : {
         "email": "", 
         "password" : "",
         "name": "",
