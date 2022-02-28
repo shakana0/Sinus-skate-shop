@@ -1,120 +1,113 @@
 <template>
-  <nav>
-    <div class="products-nav">
-      <button
-        class="menu-btn"
-        @click="
-          if (!skateMenu) {
-            skateMenu = true;
-            apparelMenu = false;
-          } else {
-            skateMenu = false;
-          }
-        "
-      >
-        Skate <span>&#x25BC;</span>
-      </button>
-      <div class="drop-menu skate" v-if="skateMenu">
-        <router-link
-          :to="{ path: '/Products', query: { Category: 'Skateboard' } }"
-          class="product-link"
-        >
-          Skateboards
-        </router-link>
-        <router-link
-          :to="{ path: '/Products', query: { Category: 'Wheel' } }"
-          class="product-link"
-        >
-          Wheels
-        </router-link>
-      </div>
-      <button
-        class="menu-btn"
-        @click="
-          if (!apparelMenu) {
-            apparelMenu = true;
-            skateMenu = false;
-          } else {
-            apparelMenu = false;
-          }
-        "
-      >
-        Apparel <span>&#x25BC;</span>
-      </button>
-      <div class="drop-menu apparel" v-if="apparelMenu">
-        <router-link
-          :to="{ path: '/Products', query: { Category: 'Hoodie' } }"
-          class="product-link"
-        >
-          Hoodies
-        </router-link>
-        <router-link
-          :to="{ path: '/Products', query: { Category: 'Tshirt' } }"
-          class="product-link"
-        >
-          T-shirts
-        </router-link>
-        <router-link
-          :to="{ path: '/Products', query: { Category: 'Socks' } }"
-          class="product-link"
-        >
-          Socks
-        </router-link>
-        <router-link
-          :to="{ path: '/Products', query: { Category: 'Cap' } }"
-          class="product-link"
-        >
-          Caps
-        </router-link>
-        <router-link
-          :to="{ path: '/Products', query: { Category: 'Totebag' } }"
-          class="product-link"
-        >
-          Totebag
-        </router-link>
-      </div>
-      <!-- <router-link to="/Products">APPAREL</router-link> -->
-    </div>
-    <div class="icons-wrapper">
-      <input type="text" />
-      <button @click="toogleLogInModal">
-        <span class="material-icons"> person_outline </span>
-      </button>
-      <button @click="toogleCartModal">
-        <span class="material-icons"> shopping_cart </span>
-      </button>
-    </div>
-    <ShoppingBag v-if="showCartModal" class="cart-modal"/>
-    <LogInModal class="login-modal" v-if="showLogInModal" />
-  </nav>
+    <nav>
+        <div class="products-nav">
+            <button class="menu-btn" 
+            @click="
+            if(!skateMenu)
+            {skateMenu=true
+            apparelMenu=false}
+            else {skateMenu=false}
+            ">
+                Skate <span>&#x25BC;</span>
+            </button>
+            <div class="drop-menu skate" v-if="skateMenu">
+                <router-link :to="{path:'/Products', 
+                query:{Category:'Skateboard'}}" class="product-link">
+                Skateboards
+                </router-link>
+                <router-link :to="{path:'/Products', 
+                query:{Category:'Wheel'}}" 
+                class="product-link">
+                Wheels
+                </router-link>
+            </div>
+            <button class="menu-btn"
+            @click="
+            if(!apparelMenu)
+            {apparelMenu=true
+            skateMenu=false}
+            else {apparelMenu=false}
+            ">
+                Apparel <span>&#x25BC;</span>
+            </button>
+            <div class="drop-menu apparel" v-if="apparelMenu">
+                <router-link :to="{path:'/Products', 
+                query:{Category:'Hoodie'}}" 
+                class="product-link">
+                Hoodies
+                </router-link>
+                <router-link :to="{path:'/Products', 
+                query:{Category:'Tshirt'}}" 
+                class="product-link">
+                T-shirts
+                </router-link>
+                <router-link :to="{path:'/Products', 
+                query:{Category:'Socks'}}" 
+                class="product-link">
+                Socks
+                </router-link>
+                <router-link :to="{path:'/Products', 
+                query:{Category:'Cap'}}" class="product-link">
+                Caps
+                </router-link>
+                <router-link :to="{path:'/Products', 
+                query:{Category:'Totebag'}}" 
+                class="product-link">
+                Totebag
+                </router-link>
+            </div>
+            <!-- <router-link to="/Products">APPAREL</router-link> -->
+        </div>
+        <div class="icons-wrapper">
+            <input type="text">
+            <button @click="toogleLogInModal(); goToProfile();">
+                <span class="material-icons">
+                    person_outline
+                </span>
+                <p class="login-status" v-if="loggedIn">Your account</p>
+                <p class="login-status" v-else>Log in/register</p>
+            </button>    
+            <button @click="toogleCartModal">
+                <span class="material-icons"> shopping_cart </span>
+            </button>
+        </div>
+        <ShoppingBag v-if="showCartModal" class="cart-modal"/>
+        <LogInModal class="login-Module" v-if="showLogInModal && !loggedIn"/>
+    </nav>
 </template>
 
 <script>
 import LogInModal from "@/components/LoginModal.vue";
 import ShoppingBag from "@/components/ShoppingBag.vue";
 export default {
-  components: { LogInModal, ShoppingBag },
-  data() {
-    return {
-      showLogInModal: false,
-      skateMenu: false,
-      apparelMenu: false,
-      showCartModal: false,
-    };
-  },
-  methods: {
-    toogleLogInModal() {
-      this.showLogInModal = !this.showLogInModal;
+    components: { LogInModal, ShoppingBag },
+    data(){
+        return {
+            showCartModal: false,
+            showLogInModal : false,
+            skateMenu: false,
+            apparelMenu: false
+        }
     },
-    toogleCartModal() {
-      this.showCartModal = !this.showCartModal;
+    methods:{
+        toogleLogInModal(){
+            this.showLogInModal = !this.showLogInModal;
+        },
+        goToProfile() {
+            if(this.loggedIn && this.$router.currentRoute.path != '/Profile'){
+                this.$router.push({path: '/Profile'})
+            }
+        },
+        toogleCartModal() {
+            this.showCartModal = !this.showCartModal;
+        }
     },
-    // ,
-    // addQuerySkateBoard(){
-    //      this.$router.replace({name: 'ProductsPage', query: {category: "Skateboard"} })
-    // }
-  },
-};
+    computed: {
+        loggedIn() {
+            return Object.keys(this.$store.state.user).includes('email')
+        }
+    }
+}
 </script>
 
 <style scoped lang="scss">
@@ -214,20 +207,29 @@ button {
 .material-icons:hover {
   color: #38d8c4;
 }
-.login-modal {
-  position: absolute;
-  left: 0;
+
+.login-modal,.cart-modal{
+  position:absolute;
   right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  top: 12rem;
 }
-.cart-modal {
-  position: absolute;
-  left: 65%;
+// .login-modal {
+//   position: absolute;
+//   left: 0;
 //   right: 0;
-  top: 5%;
-  bottom: 0;
-//   margin: auto;
+//   top: 0;
+//   bottom: 0;
+// }
+// .cart-modal {
+//   position: absolute;
+//   left: 65%;
+// //   right: 0;
+//   top: 5%;
+//   bottom: 0;
+// //   margin: auto;
+// }
+.login-status {
+    color: white;
+    font-size: 0.6rem;
 }
 </style>

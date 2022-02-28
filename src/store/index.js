@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     user: {},
+    isRegistered: false,
     errors: {
       loginError: false,
       registrationError: false,
@@ -27,6 +28,19 @@ export default new Vuex.Store({
     saveInCart(state, product) {
       state.inCart.push({ id: product.id, amount: 1 });
     },
+    checkRegistrationError(state, isError) {
+      console.log(isError);
+      state.errors.registrationError = isError
+      if(isError == false){
+        state.isRegistered = true;
+      }
+    },
+    modifyRegistrationStatus(state, isRegistrated){
+      state.isRegistered = isRegistrated;
+    },
+    modifyUserState(state){
+      state.user = {};
+    }
   },
   actions: {
     async getItems(context, query) {
@@ -39,10 +53,15 @@ export default new Vuex.Store({
         console.log("den finns redan");
       }
     },
-
-    async handleRegistration(context, registrationObject) {
-      const request = await api.regiserUser(registrationObject);
-      request;
+    async handleRegistration(context, registrationObject){
+      let request = await api.regiserUser(registrationObject);
+      if(request >= 300){
+        context.commit('checkRegistrationError', true);
+      }
+      else{
+        context.commit('checkRegistrationError', false);
+      }
+      // return request
     },
     async handleLogIn(context, loginObject) {
       const response = await api.loginUser(loginObject);
@@ -78,8 +97,14 @@ export default new Vuex.Store({
         context.state.inCart.splice(context.state.inCart.indexOf(cart), 1)
       }
     },
+    getRegistrationStatus(context, isRegistered){
+      context.commit("modifyRegistrationStatus", isRegistered);
+    },
+    logout(context){
+      api.saveToken("");
+      context.commit("modifyUserState");
+    }
   },
-
   getters: {
     filterProducts(state) {
       return function (category) {
