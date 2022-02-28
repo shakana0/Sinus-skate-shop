@@ -11,59 +11,61 @@
       <input type="text" placeholder="Zip Code" v-model="formData.address.zip" />
     </div>
     <div>
-      <input type="text" placeholder="Name" required v-model="formFirstName" />
-      <input type="text" placeholder="Lastname" required v-model="formLastName" />
+      <input type="text" placeholder="Name" required v-model="firstName" />
+      <input type="text" placeholder="Lastname" required v-model="lastName" />
     </div>
     <div>
       <input type="text" placeholder="Adress" required v-model="formData.address.street"/>
     </div>
     <div>
       <input type="text" placeholder="District" required v-model="formData.address.city"/>
-      <input type="text" placeholder="Phone Number" required />
     </div>
      </form>
 </template>
 
 <script>
 export default {
+  data(){
+    return{
+      firstName: "",
+      lastName:""
+    }
+  },
   methods: {
-    sendForm() {
-      // this.$emit(formData)
+    // sendForm() {
+    //   // this.$emit(formData)
+    // }
+    destructName(name) {
+        let destrcutedName = name.split(" ");
+        this.firstName = destrcutedName[0];
+        this.lastName = destrcutedName[1];
     }
   },
   computed: {
-    // loggedInUser() {
-    //   return this.$store.state.user
-    // },
-    formFirstName() {
-      // var fullName = ""
-      // var firstName = ""
-      // if(this.$store.state.user) {
-      //   fullName = this.$store.state.user.name
-      //   firstName = fullName.split(" ")[0]
-      // }
-      // console.log(firstName[0])
-      return this.$store.state.user ? this.$store.state.user.name.split(" ")[0] : ""
-    },
-    formLastName() {
-      return this.$store.state.user ? this.$store.state.user.name.split(" ")[1] : ""
-    },
-      // return this.$store.state.user ? this.$store.state.user.name.split(' ')[0] : ""
-    // },
-    formData() {
+    formData(){  
       let loggedInUser = {...this.$store.state.user}
-      return this.$store.state.user ? loggedInUser : {
-        "email": "", 
-        "password" : "",
-        "name": "",
-        "address": {
-          "city": "",
-          "street": "",
-          "zip": "",
+      console.log(loggedInUser);
+      if(Object.keys(loggedInUser).length > 0){
+        this.destructName(loggedInUser.name);
+        return loggedInUser;
+      }
+      else{
+        return {
+          email: "", 
+          password : "",
+          name: "",
+          address: {
+            city: "",
+            street: "",
+            zip: ""
+          }
         }
       }
+    },
+    fullName(){
+      return this.firstName + " " + this.lastName;
     }
-  }
+  },
 };
 </script>
 
