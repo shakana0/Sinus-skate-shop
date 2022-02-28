@@ -3,14 +3,6 @@
     <nav>
        <img class="close-icon" src="@/assets/icons/close.svg" alt="close icon" @click="$emit('closeModal')">
     </nav>
-    <!-- <div class="modal-stars">
-      <img src="../assets/icons/star.png" width="20px" alt="">
-      <img src="../assets/icons/star.png" width="20px" alt="">
-      <img src="../assets/icons/star.png" width="20px" alt="">
-      <img src="../assets/icons/star.png" width="20px" alt="">
-      <img src="../assets/icons/star.png" width="20px" alt="">
-    </div> -->
-
       <section class="articel-wrapper">
           <article class="product-info-left">
             <img class="product-image" :class="product.category" :src="'http://localhost:5000/images/' + product.imgFile" alt="product">
@@ -40,7 +32,7 @@
                     <div class="counter">1</div>
                   <span class="add-to-cart">-</span>
                 </div>
-                <button class="add-btn">Add to cart</button>
+                <button class="add-btn" @click="addToCart">Add to cart</button>
               </div>    
           </article>
       </section> 
@@ -51,6 +43,9 @@
 export default {
   props: ['product'],
   methods: {
+      addToCart(){
+          this.$store.dispatch('addToCart', this.product)
+      }
   },
 };
 </script>
