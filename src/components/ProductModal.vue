@@ -26,12 +26,12 @@
               </div> 
 
               <div>
-                <div class="add-to-cart-wrapper">
+                <!-- <div class="add-to-cart-wrapper">
                   <p class="bold">QTY</p>
                   <span class="add-to-cart">+</span>
                     <div class="counter">1</div>
                   <span class="add-to-cart">-</span>
-                </div>
+                </div> -->
                 <button class="add-btn" @click="addToCart">Add to cart</button>
               </div>    
           </article>
@@ -104,19 +104,19 @@ height: 10%;
  padding: 0.5rem 0rem;
 }
 .product-info-right{
-      height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-   padding: 1rem;
+    padding: 1rem;
     box-sizing: border-box;
 }
 .product-info-center h1{
-  font-size: 38px;
+    font-size: 38px;
 }
 .bold{
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 }
 .product-image{
     max-height: 190px;
@@ -160,5 +160,15 @@ text-align: center;
     padding: 0.7rem;
     border: none;
     width: 9rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    
+    cursor:pointer;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    &:hover{
+      background-color: #E18C8C;
+    }
 }
 </style>

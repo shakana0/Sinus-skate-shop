@@ -38,8 +38,8 @@
         <p>Total</p>
         <p>£{{ getTotalPrice }}</p>
       </div>
-      <router-link to="/Checkout">
-        <button>CHECK OUT</button>
+      <router-link class="button" to="/Checkout" >
+        <!-- <button>CHECK OUT</button> -->CHECK OUT
       </router-link>
     </section>
   </main>
@@ -68,6 +68,7 @@ export default {
 
 <style scoped lang="scss">
 main {
+  padding: 1.5rem;
   width: 370px;
   height: 480px;
   overflow: scroll;
@@ -135,17 +136,18 @@ main {
         font-size: 1.1rem;
       }
     }
-    a {
+    .button {
       align-self: center;
-
-      button {
-        font-weight: 600;
-        color: white;
-        padding: 0.6rem 1.3rem;
-        background-color: #df0000;
-        border: none;
-        border-radius: 5px;
-      }
+      font-weight: 600;
+      color: white;
+      padding: 0.6rem 1.3rem;
+      background-color: #df0000;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.5rem;
+    }
+    .button:hover{
+      background-color: #E18C8C;
     }
   }
 }

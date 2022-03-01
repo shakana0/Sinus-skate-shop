@@ -1,7 +1,7 @@
 <template>
   <div class="overlay" :class="{show}">
-    <div class="fade-layer"></div>
-    <div class="content">
+    <div class="fade-layer" @click="$emit('closeModal')"></div>
+    <div>
       <slot></slot>
     </div>
   </div>
@@ -22,6 +22,7 @@ export default {
   background-color: rgba(0,0,0,0.25);
 }
 .overlay{
+  position: absolute;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s;
@@ -36,4 +37,11 @@ export default {
   top: 50%;
   transform: translate(-50%,-50%);
 }
+// .cart-modal{
+//   position: fixed;
+//   // right: 0;
+//   // left: 50%;
+//   // top: 50%;
+//   // transform: translate(-50%,-50%);
+// }
 </style>

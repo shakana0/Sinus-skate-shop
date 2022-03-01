@@ -139,11 +139,12 @@ export default {
     }
   .form-wrapper{
     background-color: #fff;
-    position:absolute;
-    right: 0;
-    top: 12rem;
+    //right: 0;
+    //position:absolute;
+    //right: 0;
+    //top: 0rem;
     padding: 4rem;
-    max-width: 30%;
+    //max-width: 30%;
     .form{
     display: flex;
     flex-direction: column;
