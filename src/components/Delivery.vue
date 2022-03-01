@@ -47,10 +47,10 @@ export default {
 
 <style scoped lang="scss">
 form {
-  margin: 2rem;
+  margin: 0 2rem 2rem 2rem;
   width: 400px;
   h2 {
-    margin: 2rem 0;
+    margin-bottom: 2rem;
   }
   div {
     border: 1px solid black;
