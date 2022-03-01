@@ -23,9 +23,12 @@
           </div>
           <p>{{ order.price }}</p>
           <div>
-            <span @click="addProduct(order)">+</span>
+             <img src="@/assets/icons/remove.svg" alt="" @click="removeProduct(order)" width="18px">
             <p>{{ order.amount }}</p>
-            <span @click="removeProduct(order)">-</span>
+            <img src="@/assets/icons/subtract.svg" alt="" @click="addProduct(order)" width="18px">
+            <!-- <span @click="addProduct(order)">+</span>
+            <p>{{ order.amount }}</p>
+            <span @click="removeProduct(order)">-</span> -->
           </div>
         </section>
       </article>
@@ -68,7 +71,7 @@ main {
   width: 370px;
   height: 480px;
   overflow: scroll;
-  border: 2px solid black;
+  // border: 2px solid black;
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -101,7 +104,7 @@ main {
     .order {
       display: flex;
       justify-content: space-between;
-      padding: 0 1rem;
+      padding: 0.8rem 1rem;
 
       div p:first-child {
         font-family: "Permanent Marker", cursive;
@@ -111,13 +114,10 @@ main {
         justify-content: space-between;
         width: 60px;
 
-        span {
+        img {
           text-align: center;
-          background-color: #38d8c4;
-          color: white;
           width: 1.2rem;
           height: 1.2rem;
-          border-radius: 50%;
         }
       }
     }
