@@ -40,6 +40,7 @@ export default new Vuex.Store({
       state.isRegistered = isRegistrated;
     },
     modifyUserState(state){
+      state.orders = null;
       state.user = {};
     },
     saveOrders(state,orders){
