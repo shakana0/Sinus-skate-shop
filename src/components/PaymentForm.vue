@@ -37,7 +37,7 @@ export default {
 <style scoped lang="scss">
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 form {
-  margin: 2rem;
+  // margin: 2rem;
   width: 400px;
   h2 {
     margin-bottom: 2rem;
