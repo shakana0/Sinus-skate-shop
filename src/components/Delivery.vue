@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="emitbuyEvent"> 
     <section class="delivery">
       <h2>DELIVERY</h2>
       <div>
@@ -34,6 +34,16 @@
     <button>BUY NOW</button>
   </form>
 </template>
+
+<script>
+export default {
+  methods:{
+    emitbuyEvent(){
+      this.$emit('buy-event');
+    }
+  }
+}
+</script>
 
 <style scoped lang="scss">
 form {

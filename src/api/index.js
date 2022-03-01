@@ -36,3 +36,10 @@ export async function loginUser(loginData){
 export async function getUser(){
     return await axios.get('/me/');
 }
+
+export async function addOrder(order){
+    return await axios.post('/orders/', order)
+}
+export async function getOrders(){
+    return await axios.get('/orders/')
+}

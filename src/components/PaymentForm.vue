@@ -8,17 +8,17 @@
     </select>
     <div>
       <input type="text" placeholder="Email" required v-model="formData.email"/>
-      <input type="text" placeholder="Zip Code" v-model="formData.address.zip" />
+      <input type="text" placeholder="Zip Code" v-model="formData.address.zip" @input="$emit('zip', $event.target.value)"/>
     </div>
     <div>
       <input type="text" placeholder="Name" required v-model="firstName" />
       <input type="text" placeholder="Lastname" required v-model="lastName" />
     </div>
     <div>
-      <input type="text" placeholder="Adress" required v-model="formData.address.street"/>
+      <input type="text" placeholder="Adress" required v-model="formData.address.street" @input="$emit('street', $event.target.value)"/>
     </div>
     <div>
-      <input type="text" placeholder="District" required v-model="formData.address.city"/>
+      <input type="text" placeholder="District" required v-model="formData.address.city" @input="$emit('city', $event.target.value)"/>
     </div>
      </form>
 </template>
@@ -32,9 +32,10 @@ export default {
     }
   },
   methods: {
-    // sendForm() {
-    //   // this.$emit(formData)
-    // }
+     sendForm() {
+       // this.$emit(formData)
+       console.log("formdata");
+     },
     destructName(name) {
         let destrcutedName = name.split(" ");
         this.firstName = destrcutedName[0];
