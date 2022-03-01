@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     user: {},
+    orders : null,
     isRegistered: false,
     errors: {
       loginError: false,
@@ -39,7 +40,11 @@ export default new Vuex.Store({
       state.isRegistered = isRegistrated;
     },
     modifyUserState(state){
+      state.orders = null;
       state.user = {};
+    },
+    saveOrders(state,orders){
+      state.orders = orders;
     }
   },
   actions: {
@@ -103,6 +108,15 @@ export default new Vuex.Store({
     logout(context){
       api.saveToken("");
       context.commit("modifyUserState");
+    },
+    async generateOrder(context, order){
+      context
+      await api.addOrder(order);
+    },
+    async getOrders(context){
+      let request = await api.getOrders();
+      console.log(request.data);
+      context.commit('saveOrders', request.data);
     }
   },
   getters: {

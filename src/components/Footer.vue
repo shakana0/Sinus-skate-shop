@@ -25,15 +25,15 @@
     <section class="iconsWrapper">
       <div class="icons"> 
         <h4>FOLLOW US</h4>
-        <img src="../assets/icons/instagram.png" width="45" alt="intagram icon">
-        <img src="../assets/icons/fb.png" width="45" alt="facebook icon">
-        <img src="../assets/icons/twitter.png" width="45" alt="twitter icon">
+        <img src="../assets/icons/instagram.svg" width="45" alt="intagram icon">
+        <img src="../assets/icons/facebook.svg" width="45" alt="facebook icon">
+        <img src="../assets/icons/twitter.svg" width="45" alt="twitter icon">
       </div>
 
       <div class="payIcons">
-        <img src="../assets/icons/mastercard.png" alt="">
-        <img src="../assets/icons/visa.png" alt="">
-        <img src="../assets/icons/american-express.png" alt="">
+        <img src="../assets/icons/logos_mastercard.svg" alt="">
+        <img src="../assets/icons/visa.svg" alt="">
+        <img src="../assets/icons/american-express.svg" alt="">
       </div>
     </section>
 
