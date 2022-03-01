@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="cartbag-wrapper">
     <div class="lineWrapper">
       <p>Product</p>
       <p>Price</p>
@@ -9,12 +9,18 @@
     <div class="line"></div>
     <br /><br />
     <div class="line"></div>
-    <p>Order Value</p>
-    <p>Delivery</p>
+    <div class="total">
+      <p>Order Value</p>
+      <p>£{{ getTotalPrice }}</p>
+    </div>
+    <div class="total">
+      <p>Delivery</p>
+      <p>Free</p>
+    </div>
     <div class="line"></div>
     <div class="total">
       <p>Total</p>
-      <p>£{{ getTotalPrice }}</p>
+      <p class="total-price">£{{ getTotalPrice }}</p>
     </div>
     <div class="line"></div>
     <p class="orderInfo">
@@ -35,12 +41,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-  width: 470px;
+.cartbag-wrapper {
+  margin-top: 2rem;
+  width: 400px;
+
   div.total {
     display: flex;
     justify-content: space-between;
-    p:nth-child(2) {
+    p.total-price{
       font-weight: 600;
     }
   }
