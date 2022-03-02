@@ -7,37 +7,71 @@
       <option value="">Denmark</option>
     </select>
     <div>
-      <input type="text" placeholder="Email" required />
-      <input type="text" placeholder="Zip Code" />
+      <input type="text" placeholder="Email" required v-model="formData.email"/>
+      <input type="text" placeholder="Zip Code" v-model="formData.address.zip" @input="$emit('zip', $event.target.value)"/>
     </div>
     <div>
-      <input type="text" placeholder="Name" required />
-      <input type="text" placeholder="Lastname" required />
+      <input type="text" placeholder="Name" required v-model="firstName" />
+      <input type="text" placeholder="Lastname" required v-model="lastName" />
     </div>
     <div>
-      <input type="text" placeholder="Adress" required />
+      <input type="text" placeholder="Adress" required v-model="formData.address.street" @input="$emit('street', $event.target.value)"/>
     </div>
     <div>
-      <input type="text" placeholder="District" required />
-      <input type="text" placeholder="Phone Number" required />
+      <input type="text" placeholder="District" required v-model="formData.address.city" @input="$emit('city', $event.target.value)"/>
     </div>
      </form>
 </template>
 
 <script>
 export default {
+  data(){
+    return{
+      firstName: "",
+      lastName:""
+    }
+  },
   methods: {
-    sendForm() {
-      console.log("sent :)");
+     sendForm() {
+       // this.$emit(formData)
+       console.log("formdata");
+     },
+    destructName(name) {
+        let destrcutedName = name.split(" ");
+        this.firstName = destrcutedName[0];
+        this.lastName = destrcutedName[1];
+    }
+  },
+  computed: {
+    formData(){  
+      let loggedInUser = {...this.$store.state.user}
+      console.log(loggedInUser);
+      if(Object.keys(loggedInUser).length > 0){
+        this.destructName(loggedInUser.name);
+        return loggedInUser;
+      }
+      else{
+        return {
+          email: "", 
+          password : "",
+          name: "",
+          address: {
+            city: "",
+            street: "",
+            zip: ""
+          }
+        }
+      }
     },
+    fullName(){
+      return this.firstName + " " + this.lastName;
+    }
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 form {
-  margin: 2rem;
   width: 400px;
   h2 {
     margin-bottom: 2rem;

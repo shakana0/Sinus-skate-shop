@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <router-link to="/Checkout">
-      <button>CHECK OUT</button>
-    </router-link>
+      <div class="text">
+        <p>スケートボード</p>
+      </div>
   </div>
 </template>
 
@@ -13,14 +13,29 @@ export default {
 </script>
 
 <style scoped lang="scss">
-button {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-  padding: 1rem 1.6rem;
-  background-color: #df0000;
-  border: none;
-  border-radius: 5px;
+.home{
+  background-image: url("../assets/img/hero-index1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 42rem;
+  display: flex;
+  justify-content: flex-end;
+  margin: 5rem 5rem;
 }
+.text{ 
+  width: min-content;
+  // width: -moz-min-content;
+  // width: -webkit-min-content;
+  p{
+    font-size: 3.6rem;
+    margin-right: 3rem;
+    margin-top: 3.3rem;
+    font-weight: 700;
+  }
+  
+   
 
+
+}
 </style>

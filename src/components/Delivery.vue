@@ -1,19 +1,19 @@
 <template>
-  <form>
+  <form @submit.prevent="emitbuyEvent"> 
     <section class="delivery">
       <h2>DELIVERY</h2>
       <div>
-        <input type="radio" />
+        <input type="radio" name="delivery"/>
         <p>Standard home delivery</p>
-        <img src="@/assets/icons/fedex.png" width="40px" alt="Fedex icon" />
+        <img src="@/assets/icons/fedex.png" width="40px" alt="Fedex icon"/>
       </div>
       <div>
-        <input type="radio" />
+        <input type="radio" name="delivery"/>
         <p>Standard pick up location</p>
         <img src="@/assets/icons/ups.png" width="20px" alt="Fedex icon" />
       </div>
       <div>
-        <input type="radio" />
+        <input type="radio" name="delivery"/>
         <p>Parcel locker</p>
         <img src="@/assets/icons/dhl.png" width="40px" alt="Fedex icon" />
       </div>
@@ -21,7 +21,7 @@
     <section class="payment">
       <h2>PAYMENTS</h2>
       <div>
-        <input type="radio" />
+        <input type="radio" id="id" value="id" />
         <p>Pay with card</p>
         <span class="material-icons">credit_card</span>
       </div>
@@ -35,12 +35,22 @@
   </form>
 </template>
 
+<script>
+export default {
+  methods:{
+    emitbuyEvent(){
+      this.$emit('buy-event');
+    }
+  }
+}
+</script>
+
 <style scoped lang="scss">
 form {
-  margin: 2rem;
+  margin: 0 2rem 2rem 2rem;
   width: 400px;
   h2 {
-    margin: 2rem 0;
+    margin-bottom: 2rem;
   }
   div {
     border: 1px solid black;
