@@ -70,7 +70,7 @@ export default {
 main {
   padding: 1.5rem;
   width: 370px;
-  height: 480px;
+  height: 400px;
   overflow: scroll;
   // border: 2px solid black;
   background-color: white;

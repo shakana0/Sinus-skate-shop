@@ -43,3 +43,11 @@ export async function addOrder(order){
 export async function getOrders(){
     return await axios.get('/orders/')
 }
+//admin sida
+
+export async function getProductById(id){
+    return await axios.get(`/items/${id}`);
+}
+export async function updateProductById(productInfo, id){
+    await axios.patch(`/items/${id}`,productInfo);
+}

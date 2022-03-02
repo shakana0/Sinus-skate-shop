@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    adminProduct: "",
     products: [],
     user: {},
     orders : null,
@@ -45,6 +46,11 @@ export default new Vuex.Store({
     },
     saveOrders(state,orders){
       state.orders = orders;
+    },
+
+    //sparar i state id:t önskat av admin
+    saveProductById(state, product){
+      state.adminProduct = product;
     }
   },
   actions: {
@@ -117,6 +123,17 @@ export default new Vuex.Store({
       let request = await api.getOrders();
       console.log(request.data);
       context.commit('saveOrders', request.data);
+    },
+
+    //fetchar för en admin single product by id
+    async getProductWithId(context, id){
+      let request = await api.getProductById(id);
+      context.commit('saveProductById', request.data);
+    },
+    //admin uppdatera api gör en fetch
+    async updateProductsAPI(context, productBody){
+      console.log(productBody);
+      await api.updateProductById(productBody,context.state.adminProduct.post.id);
     }
   },
   getters: {

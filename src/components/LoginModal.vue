@@ -208,12 +208,9 @@ export default {
     }
   .form-wrapper{
     background-color: #fff;
-    //right: 0;
-    //position:absolute;
-    //right: 0;
-    //top: 0rem;
-    padding: 4rem;
-    //max-width: 30%;
+    padding: 3rem;
+    height: 360px;
+    overflow: scroll;
     .form{
     display: flex;
     flex-direction: column;
@@ -224,12 +221,16 @@ export default {
     }
     label {
       font-size: 1.2rem;
+      font-family: "Roboto", sans-serif;
     }
     .input-field {
       padding: 0.6rem 0.3rem;
       margin-bottom: 0.8rem;
       margin-top: 0.3rem;
       font-size: 1rem;
+    }
+    p{
+      font-family: "Roboto", sans-serif;;
     }
 
     .submit-button {
