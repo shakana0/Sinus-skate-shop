@@ -10,7 +10,7 @@
             ">
                 Skate <span>&#x25BC;</span>
             </button>
-            <div class="drop-menu skate" v-if="skateMenu">
+            <div class="drop-menu skate" v-if="skateMenu" @click="skateMenu=false">
                 <router-link :to="{path:'/Products', 
                 query:{Category:'Skateboard'}}" class="product-link">
                 Skateboards
@@ -30,7 +30,7 @@
             ">
                 Apparel <span>&#x25BC;</span>
             </button>
-            <div class="drop-menu apparel" v-if="apparelMenu">
+            <div class="drop-menu apparel" v-if="apparelMenu" @click="apparelMenu=false">
                 <router-link :to="{path:'/Products', 
                 query:{Category:'Hoodie'}}" 
                 class="product-link">
@@ -71,27 +71,38 @@
                 <span class="material-icons"> shopping_cart </span>
             </button>
         </div>
-        <ShoppingBag v-if="showCartModal" class="cart-modal"/>
-        <LogInModal class="login-Module" v-if="showLogInModal && !loggedIn"/>
+        <Overlay  v-if="showCartModal" :show="showModal" @closeModal="closeModal">
+          <ShoppingBag class="cart-modal"/>
+          <!-- <ShoppingBag v-if="showCartModal" class="cart-modal"/> -->
+        </Overlay>
+        <Overlay v-if="showLogInModal && !loggedIn" :show="showModal" @closeModal="closeModal">
+          <LogInModal class="login-modal"/>
+          <!-- <LogInModal v-if="showLogInModal && !loggedIn" class="login-Module"/> -->
+        </Overlay>
+          
     </nav>
 </template>
 
 <script>
 import LogInModal from "@/components/LoginModal.vue";
 import ShoppingBag from "@/components/ShoppingBag.vue";
+import Overlay from "@/components/Overlay.vue";
 export default {
-    components: { LogInModal, ShoppingBag },
+    components: { LogInModal, ShoppingBag, Overlay },
     data(){
         return {
             showCartModal: false,
             showLogInModal : false,
             skateMenu: false,
-            apparelMenu: false
+            apparelMenu: false,
+            showModal: false
         }
     },
     methods:{
         toogleLogInModal(){
             this.showLogInModal = !this.showLogInModal;
+            
+            this.showModal = true;
         },
         goToProfile() {
             if(this.loggedIn && this.$router.currentRoute.path != '/Profile'){
@@ -100,6 +111,12 @@ export default {
         },
         toogleCartModal() {
             this.showCartModal = !this.showCartModal;
+            this.showModal = true;
+        },
+        closeModal(){
+            this.showModal = false;
+            this.showLogInModal = false
+            this.showCartModal = false
         }
     },
     computed: {
@@ -119,6 +136,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   max-height: 3rem;
+  // position: relative;
 }
 // .product-link {
 //     font-size: .8rem;
@@ -208,10 +226,12 @@ button {
   color: #38d8c4;
 }
 
-.login-modal,.cart-modal{
-  position:absolute;
-  right: 0;
-  top: 12rem;
+.login-modal, .cart-modal{
+  position: fixed;
+  top:12rem;
+  right: 1.5rem;
+  // top: 12rem;
+  // margin-left: auto;
 }
 // .login-modal {
 //   position: absolute;
@@ -232,4 +252,5 @@ button {
     color: white;
     font-size: 0.6rem;
 }
+
 </style>

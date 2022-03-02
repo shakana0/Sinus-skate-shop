@@ -25,6 +25,8 @@ export default {
 }
 .text{ 
   width: min-content;
+  // width: -moz-min-content;
+  // width: -webkit-min-content;
   p{
     font-size: 3.6rem;
     margin-right: 3rem;

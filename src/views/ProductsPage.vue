@@ -1,8 +1,8 @@
 <template>
   <div class="categories-page">
     <ProductList @sendCurrentProduct="saveProduct" />
-    <Overlay :show="showOverlay">
-      <ProductModal :product="currentProduct" v-if="showModal"  @closeModal="closeModal" />
+    <Overlay :show="showOverlay" @closeModal="closeModal" >
+      <ProductModal :product="currentProduct" v-if="showModal"  @closeModal="closeModal" class="content"/>
     </Overlay>
   </div>
 </template>
@@ -50,4 +50,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.categories-page{
+  display: flex;
+  justify-content: center;
+}
+</style>

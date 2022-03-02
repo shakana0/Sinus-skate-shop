@@ -193,26 +193,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
-button {
-  background-color: #df0000;
-  text-align: center;
-  font-size: 1.4rem;
-  cursor: pointer;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-}
-button:hover {
-  background-color: #e18c8c;
-}
-.form-wrapper {
-  background-color: #fff;
-  position: absolute;
-  right: 0;
-  top: 12rem;
-  padding: 4rem;
-  max-width: 30%;
-  .form {
+  
+  button{
+    background-color: #DF0000;
+    text-align: center;
+    font-size: 1.4rem;
+    cursor:pointer;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+  button:hover{
+      background-color: #E18C8C;
+    }
+  .form-wrapper{
+    background-color: #fff;
+    //right: 0;
+    //position:absolute;
+    //right: 0;
+    //top: 0rem;
+    padding: 4rem;
+    //max-width: 30%;
+    .form{
     display: flex;
     flex-direction: column;
 
