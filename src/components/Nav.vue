@@ -230,24 +230,7 @@ button {
   position: fixed;
   top:12rem;
   right: 1.5rem;
-  // top: 12rem;
-  // margin-left: auto;
 }
-// .login-modal {
-//   position: absolute;
-//   left: 0;
-//   right: 0;
-//   top: 0;
-//   bottom: 0;
-// }
-// .cart-modal {
-//   position: absolute;
-//   left: 65%;
-// //   right: 0;
-//   top: 5%;
-//   bottom: 0;
-// //   margin: auto;
-// }
 .login-status {
     color: white;
     font-size: 0.6rem;
