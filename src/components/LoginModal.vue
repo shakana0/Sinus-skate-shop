@@ -1,43 +1,115 @@
 <template>
   <div class="form-wrapper">
     <!-- <div v-if="!getUser"> -->
-        <form v-if="isloggedIn || isRegistered" class="form" @submit.prevent="login">
-        <h2 class="form-heading">Log in</h2>
-        <label for="Email">Email</label>
-        <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="registrationData.email">
-        <label for="Password">Password</label>
-        <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="registrationData.password">
-        <p class="error" v-if="loginError">Invalid credentials</p>
-        <button class="submit-button">Log in</button>
-      </form>
-      <div v-if="isloggedIn || isRegistered" class="Toogle-container">
-        <p class="toogle-text">New at Sinus?</p>
-        <button class="toogle-button" @click="toogleIsLogin">Register here</button>
-      </div>
-      <form v-if="!isloggedIn && !isRegistered" class="form" @submit.prevent="register">
-        <h2 class="form-heading">Create account</h2>
-        <label for="First-name">First name</label>
-        <input class="input-field" type="text" id="First-name" placeholder="First name" required v-model="firstName">
-        <label for="Last-name">Last name</label>
-        <input class="input-field" type="text" id="Last-name" placeholder="Last name" required v-model="lastName">
-        <label for="Email">Email</label>
-        <input class="input-field" type="email" id="Email" placeholder="Email" required v-model="registrationData.email">
-        <label for="Password">Password</label>
-        <input class="input-field" type="Password" id="Password" placeholder="Password" required v-model="registrationData.password">
-        <label for="zip">Zip</label>
-        <input class="input-field" type="Number" id="zip" placeholder="Zip" required v-model="registrationData.address.zip">
-        <label for="city">City</label>
-        <input class="input-field" type="text" id="city" placeholder="City" required v-model="registrationData.address.city">
-        <label for="street">Street</label>
-        <input class="input-field" type="text" id="street" placeholder="Street" required v-model="registrationData.address.street">
-        <p class="error" v-if="registrationError">Invalid input</p>
-        <button class="submit-button">Register</button>
-   
-      </form>
-      <div v-if="!isloggedIn && !isRegistered" class="Toogle-container">
-        <p class="toogle-text">Already have an account?</p>
-        <button class="toogle-button" @click="toogleIsLogin">Sign in</button>
-      </div>
+    <form
+      v-if="isloggedIn || isRegistered"
+      class="form"
+      @submit.prevent="login"
+    >
+      <h2 class="form-heading">Log in</h2>
+      <label for="Email">Email</label>
+      <input
+        class="input-field"
+        type="email"
+        id="Email"
+        placeholder="Email"
+        required
+        v-model="registrationData.email"
+      />
+      <label for="Password">Password</label>
+      <input
+        class="input-field"
+        type="Password"
+        id="Password"
+        placeholder="Password"
+        required
+        v-model="registrationData.password"
+      />
+      <p class="error" v-if="loginError">Invalid credentials</p>
+      <button class="submit-button">Log in</button>
+    </form>
+    <div v-if="isloggedIn || isRegistered" class="Toogle-container">
+      <p class="toogle-text">New at Sinus?</p>
+      <button class="toogle-button" @click="toogleIsLogin">
+        Register here
+      </button>
+    </div>
+    <form
+      v-if="!isloggedIn && !isRegistered"
+      class="form"
+      @submit.prevent="register"
+    >
+      <h2 class="form-heading">Create account</h2>
+      <label for="First-name">First name</label>
+      <input
+        class="input-field"
+        type="text"
+        id="First-name"
+        placeholder="First name"
+        required
+        v-model="firstName"
+      />
+      <label for="Last-name">Last name</label>
+      <input
+        class="input-field"
+        type="text"
+        id="Last-name"
+        placeholder="Last name"
+        required
+        v-model="lastName"
+      />
+      <label for="Email">Email</label>
+      <input
+        class="input-field"
+        type="email"
+        id="Email"
+        placeholder="Email"
+        required
+        v-model="registrationData.email"
+      />
+      <label for="Password">Password</label>
+      <input
+        class="input-field"
+        type="Password"
+        id="Password"
+        placeholder="Password"
+        required
+        v-model="registrationData.password"
+      />
+      <label for="zip">Zip</label>
+      <input
+        class="input-field"
+        type="Number"
+        id="zip"
+        placeholder="Zip"
+        required
+        v-model="registrationData.address.zip"
+      />
+      <label for="city">City</label>
+      <input
+        class="input-field"
+        type="text"
+        id="city"
+        placeholder="City"
+        required
+        v-model="registrationData.address.city"
+      />
+      <label for="street">Street</label>
+      <input
+        class="input-field"
+        type="text"
+        id="street"
+        placeholder="Street"
+        required
+        v-model="registrationData.address.street"
+      />
+      <p class="error" v-if="registrationError">Invalid input</p>
+      <button class="submit-button">Register</button>
+    </form>
+    <div v-if="!isloggedIn && !isRegistered" class="Toogle-container">
+      <p class="toogle-text">Already have an account?</p>
+      <button class="toogle-button" @click="toogleIsLogin">Sign in</button>
+    </div>
     <!-- </div> -->
     <!-- <div v-else>
       <p>Logged in</p>
@@ -47,60 +119,58 @@
 
 <script>
 export default {
-  props:{
-    isLogIn:{
-      default: true
-    }
+  props: {
+    isLogIn: {
+      default: true,
+    },
   },
-  data(){
-    return{
-      firstName : "",
+  data() {
+    return {
+      firstName: "",
       lastName: "",
-      isloggedIn : "",
-      registrationData:{
+      isloggedIn: "",
+      registrationData: {
         email: "",
         password: "",
         name: "",
-        address:{
+        address: {
           zip: "",
           city: "",
-          street : "",
-        }
-      }
-    }
+          street: "",
+        },
+      },
+    };
   },
-  computed:{
-    fullName(){
+  computed: {
+    fullName() {
       return this.firstName + " " + this.lastName;
     },
-    loginError(){
+    loginError() {
       return this.$store.state.errors.loginError;
-    }
-    ,
-    registrationError(){
+    },
+    registrationError() {
       return this.$store.state.errors.registrationError;
     },
-    getUser(){
-      return Object.keys(this.$store.state.user).includes('email');
+    getUser() {
+      return Object.keys(this.$store.state.user).includes("email");
     },
-    isRegistered(){
+    isRegistered() {
       return this.$store.state.isRegistered;
-    }
-    
+    },
   },
-  methods:{
-    login(){
+  methods: {
+    login() {
       const loginData = {
         email: this.registrationData.email,
-        password: this.registrationData.password
-      }
-      this.$store.dispatch('handleLogIn',  loginData);
+        password: this.registrationData.password,
+      };
+      this.$store.dispatch("handleLogIn", loginData);
       //dispatch email and username
     },
-    register(){
+    register() {
       this.registrationData.name = this.fullName;
       // console.log(this.registrationData);
-      this.$store.dispatch('handleRegistration', this.registrationData);
+      this.$store.dispatch("handleRegistration", this.registrationData);
       // if(!this.registrationError){
       //   this.isloggedIn = true;
       // }
@@ -111,16 +181,15 @@ export default {
       // let registerData = this.$store.dispatch('handleRegistration', this.registrationData);
       // console.log(registerData + "hejhejehej")
     },
-    toogleIsLogin(){
+    toogleIsLogin() {
       this.isloggedIn = !this.isloggedIn;
-      this.$store.dispatch('getRegistrationStatus', false);
-    }
-
+      this.$store.dispatch("getRegistrationStatus", false);
+    },
   },
-  created(){
+  created() {
     this.isloggedIn = this.isLogIn;
-  }
-}
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -149,35 +218,33 @@ export default {
     display: flex;
     flex-direction: column;
 
-    .form-heading{
+    .form-heading {
       margin-bottom: 1.2rem;
       font-size: 1.6rem;
     }
-    label{
+    label {
       font-size: 1.2rem;
     }
-    .input-field{
-      padding:0.6rem 0.3rem;
+    .input-field {
+      padding: 0.6rem 0.3rem;
       margin-bottom: 0.8rem;
       margin-top: 0.3rem;
       font-size: 1rem;
     }
-  
-    .submit-button{
+
+    .submit-button {
       padding: 0.6rem 0.4rem;
     }
   }
-  .Toogle-container{
+  .Toogle-container {
     margin-top: 2.5rem;
   }
-  .toogle-button{
+  .toogle-button {
     margin-top: 0.4rem;
-    padding: 0.3rem 0.5rem
+    padding: 0.3rem 0.5rem;
   }
   .error {
-    color: #DF0000;
+    color: #df0000;
   }
 }
-  
-  
 </style>

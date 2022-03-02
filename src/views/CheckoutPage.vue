@@ -1,6 +1,5 @@
 <template>
   <main class="checkoutLayout">
-    <!-- <router-link to="/"><button>Home</button> </router-link> -->
     <h2>CHECKOUT</h2>
     <PaymentForm @street="getStreet" @zip="getZip" @city="getCity" class="paymentform"/>
     <CartBag class="cartbag"/>
