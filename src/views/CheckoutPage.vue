@@ -1,7 +1,7 @@
 <template>
   <main class="checkoutLayout">
     <h2>CHECKOUT</h2>
-    <PaymentForm @street="getStreet" @zip="getZip" @city="getCity" class="paymentform"/>
+    <PaymentForm @street="getStreet" @zip="getZip" @city="getCity" class="paymentform" />
     <CartBag class="cartbag"/>
     <Delivery @buy-event="generateOrder" class="delivery"/>
   </main>
