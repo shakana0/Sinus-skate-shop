@@ -1,48 +1,60 @@
 <template>
-  <form @submit.prevent="emitbuyEvent"> 
-    <section class="delivery">
-      <h2>DELIVERY</h2>
-      <div>
-        <input type="radio" name="delivery"/>
-        <p>Standard home delivery</p>
-        <img src="@/assets/icons/fedex.png" width="40px" alt="Fedex icon"/>
-      </div>
-      <div>
-        <input type="radio" name="delivery"/>
-        <p>Standard pick up location</p>
-        <img src="@/assets/icons/ups.png" width="20px" alt="Fedex icon" />
-      </div>
-      <div>
-        <input type="radio" name="delivery"/>
-        <p>Parcel locker</p>
-        <img src="@/assets/icons/dhl.png" width="40px" alt="Fedex icon" />
-      </div>
+  <div class="wrapper">
+    <form @submit.prevent="emitbuyEvent">
+      <section class="delivery">
+        <h2>DELIVERY</h2>
+        <div>
+          <input type="radio" name="delivery" />
+          <p>Standard home delivery</p>
+          <img src="@/assets/icons/fedex.png" width="40px" alt="Fedex icon" />
+        </div>
+        <div>
+          <input type="radio" name="delivery" />
+          <p>Standard pick up location</p>
+          <img src="@/assets/icons/ups.png" width="20px" alt="Fedex icon" />
+        </div>
+        <div>
+          <input type="radio" name="delivery" />
+          <p>Parcel locker</p>
+          <img src="@/assets/icons/dhl.png" width="40px" alt="Fedex icon" />
+        </div>
+      </section>
+      <section class="payment">
+        <h2>PAYMENTS</h2>
+        <div>
+          <input type="radio" id="id" value="id" />
+          <p>Pay with card</p>
+          <span class="material-icons">credit_card</span>
+        </div>
+      </section>
+      <section class="icons-wrapper">
+        <img src="@/assets/icons/logos_mastercard.png" width="40px" alt="" />
+        <img src="@/assets/icons/visa-color.png" width="40px" alt="" />
+        <img src="@/assets/icons/american-color.png" width="40px" alt="" />
+      </section>
+      <button>BUY NOW</button>
+    </form>
+    <section class="verified" v-if="showDialog">
+      <span class="material-icons"> verified </span>
+      <p>Thank you for your purchase</p>
     </section>
-    <section class="payment">
-      <h2>PAYMENTS</h2>
-      <div>
-        <input type="radio" id="id" value="id" />
-        <p>Pay with card</p>
-        <span class="material-icons">credit_card</span>
-      </div>
-    </section>
-    <section class="icons-wrapper">
-      <img src="@/assets/icons/logos_mastercard.png" width="40px" alt="" />
-      <img src="@/assets/icons/visa-color.png" width="40px" alt="" />
-      <img src="@/assets/icons/american-color.png" width="40px" alt="" />
-    </section>
-    <button>BUY NOW</button>
-  </form>
+  </div>
 </template>
 
 <script>
 export default {
-  methods:{
-    emitbuyEvent(){
-      this.$emit('buy-event');
+  data(){
+    return{
+showDialog: false
     }
-  }
-}
+  },
+  methods: {
+    emitbuyEvent() {
+      this.$emit("buy-event");
+      this.showDialog = true
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -81,6 +93,28 @@ form {
     background-color: #df0000;
     border: none;
     border-radius: 5px;
+
+    &:hover {
+      background-color: #e18c8c;
+    }
+  }
+}
+div.wrapper{
+display: flex;
+flex-direction: column;
+}
+section.verified {
+  width: 250px;
+  height: 150px;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+
+  span {
+    font-size: 7rem;
   }
 }
 </style>
