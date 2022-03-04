@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isSuccessOrder: false,
     adminProduct: "",
     products: [],
     user: {},
@@ -51,9 +52,45 @@ export default new Vuex.Store({
     //sparar i state id:t önskat av admin
     saveProductById(state, product){
       state.adminProduct = product;
+    },
+    modifyOrderSuccessStatus(state, status){
+      state.isSuccessOrder = status;
+    },
+    clearTheCart(state){
+      state.inCart = [];
+    },
+    updateProducts(state, newProduct){
+      // return function (category) {
+      //   return state.products.find(
+      //     (products) => products.category == category
+      //   );
+      // };
+      console.log("new product: " + newProduct.product);
+      // let isCategoryInState = state.products.includes((product) => product.category == newProduct.product.category);
+      let isCategoryInState = false;
+      for(let product of state.products){
+        if(product.category == newProduct.product.category){
+          isCategoryInState = true;
+        }
+      }
+      if(!isCategoryInState){
+        state.products.push(newProduct.product);
+      }
+
+      console.log(state.products);
+    },
+    removeProduct(state, id){
+      for(let i = 0; i < state.products.length; i++){
+        if(state.products[i].id == id){
+          state.products.splice(i,1);
+        }
+      }
     }
   },
   actions: {
+    /**
+     * Fiiiixaaaa
+     */
     async getItems(context, query) {
       if (
         !context.state.products.find((product) => product.category == query)
@@ -117,7 +154,13 @@ export default new Vuex.Store({
     },
     async generateOrder(context, order){
       context
-      await api.addOrder(order);
+      let response = await api.addOrder(order);
+      if (response >= 300) {
+        context.commit("modifyOrderSuccessStatus", false);
+      } else {
+        context.commit("modifyOrderSuccessStatus", true);
+      }
+      
     },
     async getOrders(context){
       let request = await api.getOrders();
@@ -134,17 +177,41 @@ export default new Vuex.Store({
     async updateProductsAPI(context, productBody){
       console.log(productBody);
       await api.updateProductById(productBody,context.state.adminProduct.post.id);
+    },
+    clearCart(context){
+      context.commit('clearTheCart');
+    },
+    async deleteProduct(context, productId){
+      await api.deleteProduct(productId);
+      context.commit.state("removeProduct", productId);
+    },
+    async uploadFile(context, productData){
+      const formData = new FormData()
+      formData.append("imgFile",productData.imgFile);
+      productData.imgFile = productData.imgFile.name;
+      formData.append("name", productData.imgFile.name);
+      await api.addImage(formData);
+      let newProduct = await api.addProduct(productData);
+      context.commit("updateProducts", newProduct.data);
+
     }
   },
   getters: {
     filterProducts(state) {
       return function (category) {
-        console.log(category)
+        //console.log(category)
         return state.products.filter(
           (products) => products.category == category
         );
       };
     },
+    // findCategory(state) {
+    //   return function (category) {
+    //     return state.products.find(
+    //       (products) => products.category == category
+    //     );
+    //   };
+    // },
     cart(state) {
       return state.inCart.map((cartItem) => ({
         ...state.products.find((product) => product.id == cartItem.id),

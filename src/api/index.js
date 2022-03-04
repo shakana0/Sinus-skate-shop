@@ -39,6 +39,14 @@ export async function getUser(){
 
 export async function addOrder(order){
     return await axios.post('/orders/', order)
+    .then((response) => {  
+        return response.status  
+    })
+    .catch((error) => {
+        if (error.response) {
+            return error.response.status  
+        }
+    });
 }
 export async function getOrders(){
     return await axios.get('/orders/')
@@ -50,4 +58,14 @@ export async function getProductById(id){
 }
 export async function updateProductById(productInfo, id){
     await axios.patch(`/items/${id}`,productInfo);
+}
+export async function deleteProduct(id){
+    await axios.delete(`/items/${id}`);
+}
+export async function addImage(formData){
+    await axios.post(`/images`, formData).catch(console.log("error"));
+}
+
+export async function addProduct(productData){
+    return await axios.post(`/items/`,productData);
 }

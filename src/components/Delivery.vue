@@ -34,7 +34,7 @@
       </section>
       <button>BUY NOW</button>
     </form>
-    <section class="verified" v-if="showDialog">
+    <section class="verified" v-if="checkIfSuccessfulOrder">
       <span class="material-icons"> verified </span>
       <p>Thank you for your purchase</p>
     </section>
@@ -45,13 +45,22 @@
 export default {
   data(){
     return{
-showDialog: false
+      // showDialog: false
+    }
+  },
+  computed:{
+    checkIfSuccessfulOrder(){
+      let isSuccess = this.$store.state.isSuccessOrder;
+      if(isSuccess){
+        this.$store.dispatch('clearCart');
+      }
+      return isSuccess;
     }
   },
   methods: {
     emitbuyEvent() {
       this.$emit("buy-event");
-      this.showDialog = true
+      //this.showDialog = true
     },
   },
 };
