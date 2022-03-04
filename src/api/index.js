@@ -69,3 +69,6 @@ export async function addImage(formData){
 export async function addProduct(productData){
     return await axios.post(`/items/`,productData);
 }
+export async function updateOrder(orderState){
+    return await axios.patch(`/orders/${orderState.id}`, {status: orderState.status});
+}

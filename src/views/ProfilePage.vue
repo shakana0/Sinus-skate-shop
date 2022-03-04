@@ -104,6 +104,15 @@
           <div class="info">
             <p>Order Status:</p>
             <p>{{ order.status }}</p>
+            <div>
+              <select v-model="status">
+                <option selected>inProcess</option>
+                <option>shipped</option>
+                <option>canceled</option>
+              </select>
+               <button @click="updateStatus(order.id)">Update status</button>
+            </div>
+            
           </div>
           <div class="order-number">
             <p>Ordernumber:</p>
@@ -136,6 +145,7 @@
 export default {
   data() {
     return {
+      status : null,
       isOrder: true,
       isProducts: false,
       productId : "",
@@ -205,6 +215,15 @@ export default {
         price: this.price
       }
       this.$store.dispatch('uploadFile', newProductData);   
+    },
+    updateStatus(id){
+      console.log(id);
+      const obj = {
+        id: id,
+        status: this.status
+      }
+      this.$store.dispatch('updateOrderState',obj);
+      console.log(this.status);
     }
   },
   created() {

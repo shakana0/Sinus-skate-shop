@@ -193,8 +193,12 @@ export default new Vuex.Store({
       await api.addImage(formData);
       let newProduct = await api.addProduct(productData);
       context.commit("updateProducts", newProduct.data);
-
+    },
+    async updateOrderState(context, orderObj){
+      context
+      await api.updateOrder(orderObj);
     }
+
   },
   getters: {
     filterProducts(state) {
