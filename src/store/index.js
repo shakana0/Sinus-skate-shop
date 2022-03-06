@@ -60,13 +60,7 @@ export default new Vuex.Store({
       state.inCart = [];
     },
     updateProducts(state, newProduct){
-      // return function (category) {
-      //   return state.products.find(
-      //     (products) => products.category == category
-      //   );
-      // };
       console.log("new product: " + newProduct.product);
-      // let isCategoryInState = state.products.includes((product) => product.category == newProduct.product.category);
       let isCategoryInState = false;
       for(let product of state.products){
         if(product.category == newProduct.product.category){
@@ -83,6 +77,22 @@ export default new Vuex.Store({
       for(let i = 0; i < state.products.length; i++){
         if(state.products[i].id == id){
           state.products.splice(i,1);
+          break;
+        }
+      }
+    },
+    updateProduct(state, product){
+      let id = product.id;
+      let productInfoToUpdate = product.productToUpdate;
+      for(let i = 0; i < state.products.length; i++){
+        if(state.products[i].id == id){
+          state.products[i].title = productInfoToUpdate.title;
+          state.products[i].shortDesc = productInfoToUpdate.shortDesc;
+          state.products[i].longDesc = productInfoToUpdate.longDesc;
+          state.products[i].imgFile = productInfoToUpdate.imgFile;
+          state.products[i].category = productInfoToUpdate.category;
+          state.products[i].price = productInfoToUpdate.price;
+          break;
         }
       }
     }
@@ -174,16 +184,18 @@ export default new Vuex.Store({
       context.commit('saveProductById', request.data);
     },
     //admin uppdatera api gör en fetch
-    async updateProductsAPI(context, productBody){
-      console.log(productBody);
-      await api.updateProductById(productBody,context.state.adminProduct.post.id);
+    async updateProductsAPI(context, productData){  
+      let response = await api.updateProductById(productData.productToUpdate,productData.id);
+      if(response < 300){
+        context.commit('updateProduct' ,productData);
+      }
     },
     clearCart(context){
       context.commit('clearTheCart');
     },
     async deleteProduct(context, productId){
       await api.deleteProduct(productId);
-      context.commit.state("removeProduct", productId);
+      context.commit("removeProduct", productId);
     },
     async uploadFile(context, productData){
       const formData = new FormData()

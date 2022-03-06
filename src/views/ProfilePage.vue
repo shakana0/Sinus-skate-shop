@@ -12,14 +12,39 @@
 
     <!-- admin sida -->
     
-    <section v-if="isProducts">
-      <label>Enter id:
-        <input type="number" placeholder="product id" v-model="productId">
-      </label>
-      <button @click="getProduct">Get product</button>
-      <button @click="deleteProduct">Delete Product</button>
-      
-      <form @submit.prevent="addProduct">
+    <section class="products-wrapper" v-if="isProducts">
+      <div class="container-delete-update">
+        <label>Enter id:
+          <input type="number" placeholder="product id" v-model="productId">
+        </label>
+        <button class="smaller-button" @click="getProduct">Get product</button>
+        <button class="smaller-button" @click="deleteProduct">Delete Product</button>
+        <form class="update-product" v-if="getAdminProduct" @submit.prevent="updateProduct">
+          <label>Title</label>
+          <input type="text" v-model="getAdminProduct.title">
+          <label>Short description</label>
+          <input type="text" v-model="getAdminProduct.shortDesc">
+          <label>Long description</label>  
+          <input type="text" v-model="getAdminProduct.longDesc">
+          <label>Product picture file</label>
+          <input type="text" v-model="getAdminProduct.imgFile">
+          <label>Category</label>
+          <select v-model="getAdminProduct.category">
+            <option value="skateboard">Skateboard</option>
+            <option value="wheels">Wheels</option>
+            <option value="cap">Cap</option>
+            <option value="hoodie">Hoodie</option>
+            <option value="socks">Socks</option>
+            <option value="tshirt">T-shirt</option>
+            <option value="totebag">Totebag</option>
+          </select> 
+          <label>Price</label>
+          <input type="text" v-model="getAdminProduct.price">
+          <button class="update-product smaller-button">Update product</button>
+        </form>
+      </div>
+
+      <form class="create-product-form" @submit.prevent="addProduct">
         <p>Create Product</p>
         <label>Title</label>
         <input type="text" placeholder="Title" required v-model="title">
@@ -33,7 +58,7 @@
         <label>Category</label>
         <select required v-model="category">
           <option value="skateboard">Skateboard</option>
-          <option value="wheels">Wheels</option>
+          <option value="wheel">Wheels</option>
           <option value="cap">Cap</option>
           <option value="hoodie">Hoodie</option>
           <option value="socks">Socks</option>
@@ -42,32 +67,9 @@
         </select>
         <label>Price</label>
         <input type="text" placeholder="price" required v-model="price">
-        <button class="update-product">Add Product</button>
+        <button class="update-product smaller-button">Add Product</button>
       </form>  
-
-      <form v-if="getAdminProduct" @submit.prevent="updateProduct">
-        <label>Title</label>
-        <input type="text" v-model="getAdminProduct.title">
-        <label>Short description</label>
-        <input type="text" v-model="getAdminProduct.shortDesc">
-        
-        <input type="text" v-model="getAdminProduct.longDesc">
-        <input type="text" v-model="getAdminProduct.imgFile">
-        
-        <select v-model="getAdminProduct.category">
-          <option value="skateboard">Skateboard</option>
-          <option value="wheels">Wheels</option>
-          <option value="cap">Cap</option>
-          <option value="hoodie">Hoodie</option>
-          <option value="socks">Socks</option>
-          <option value="tshirt">T-shirt</option>
-          <option value="totebag">Totebag</option>
-        </select>
-        <input type="text" v-model="getAdminProduct.price">
-        <button class="update-product">Update product</button>
-      </form>
-      <p v-if="getAdminProduct">{{getAdminProduct.title}}</p>
-      <p>Products view</p>
+      <!-- <p v-if="getAdminProduct">{{getAdminProduct.title}}</p> -->
     </section>
 
     <!-- admin och användarsida -->
@@ -101,16 +103,16 @@
             <p>Created At:</p>
             <p>{{ order.createdAt }}</p>
           </div>
-          <div class="info">
+          <div class="info order-status-container">
             <p>Order Status:</p>
             <p>{{ order.status }}</p>
-            <div>
+            <div v-if="getUserData.role == 'admin'" class="update-status-container">
               <select v-model="status">
-                <option selected>inProcess</option>
+                <option>inProcess</option>
                 <option>shipped</option>
                 <option>canceled</option>
               </select>
-               <button @click="updateStatus(order.id)">Update status</button>
+              <button class="update-status-button" @click="updateStatus(order.id)">Update status</button>
             </div>
             
           </div>
@@ -192,15 +194,19 @@ export default {
     // admin
     updateProduct(){
       let temp = this.getAdminProduct;
-      let productToUpdate = {
-        title: temp.title,
-        shortDesc:temp.shortDesc,
-        longDesc:temp.longDesc,
-        imgFile:temp.imgFile,
-        category:temp.category,
-        price:temp.price
+      console.log(this.productId);
+      let productData = {
+        id: this.productId,
+        productToUpdate:{
+          title: temp.title,
+          shortDesc:temp.shortDesc,
+          longDesc:temp.longDesc,
+          imgFile:temp.imgFile,
+          category:temp.category,
+          price:temp.price
+        }
       }
-      this.$store.dispatch('updateProductsAPI', productToUpdate);
+      this.$store.dispatch('updateProductsAPI', productData);
     },
     addFile(event){
       this.file = event.target.files;
@@ -396,4 +402,43 @@ form {
       margin-top: 0.5rem;
     }
 }
+.order-status-container{
+  display: flex;
+  align-items: center;
+}
+.update-status-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .update-status-button{
+    font-size: 0.8rem;
+    margin: 0rem;
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.5rem;
+  }
+  select{
+    padding: 0.2rem;
+  }
+}
+.products-wrapper{
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  .container-delete-update{
+    label,input{
+      margin-right: 5rem;
+      justify-self: center;
+    }
+  }
+}
+.smaller-button{
+  font-size: 0.8rem;
+  padding: 0.5rem 0.5rem;
+  margin: 1rem 0.5rem;
+}
+input,select{
+  padding: 0.2rem;
+  font-size: 1rem;
+}
+
 </style>
