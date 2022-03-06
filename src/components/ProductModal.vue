@@ -44,7 +44,8 @@ export default {
   props: ['product'],
   methods: {
       addToCart(){
-          this.$store.dispatch('addToCart', this.product)
+        this.$emit("closeModal");
+        this.$store.dispatch('addToCart', this.product)
       }
   },
 };

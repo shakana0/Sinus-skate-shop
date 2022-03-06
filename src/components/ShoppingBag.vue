@@ -38,9 +38,10 @@
         <p>Total</p>
         <p>£{{ getTotalPrice }}</p>
       </div>
-      <router-link class="button" to="/Checkout" >
-        <!-- <button>CHECK OUT</button> -->CHECK OUT
-      </router-link>
+      <!-- <router-link class="button" to="/Checkout" >
+       CHECK OUT
+      </router-link> -->
+      <button class="button" @click="routeCheckOut">CHECK OUT</button>
     </section>
   </main>
 </template>
@@ -53,6 +54,11 @@ export default {
     },
     removeProduct(order){
       return this.$store.dispatch('removeFromCart', order)
+    },
+    routeCheckOut(){
+      this.$emit('closeModal');
+      if(this.$route.name != "CheckoutPage")
+        this.$router.push({path:"/Checkout"});
     }
   },
   computed: {

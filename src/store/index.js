@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isSuccessOrder: false,
     adminProduct: "",
     products: [],
     user: {},
@@ -51,9 +52,55 @@ export default new Vuex.Store({
     //sparar i state id:t önskat av admin
     saveProductById(state, product){
       state.adminProduct = product;
+    },
+    modifyOrderSuccessStatus(state, status){
+      state.isSuccessOrder = status;
+    },
+    clearTheCart(state){
+      state.inCart = [];
+    },
+    updateProducts(state, newProduct){
+      console.log("new product: " + newProduct.product);
+      let isCategoryInState = false;
+      for(let product of state.products){
+        if(product.category == newProduct.product.category){
+          isCategoryInState = true;
+        }
+      }
+      if(!isCategoryInState){
+        state.products.push(newProduct.product);
+      }
+
+      console.log(state.products);
+    },
+    removeProduct(state, id){
+      for(let i = 0; i < state.products.length; i++){
+        if(state.products[i].id == id){
+          state.products.splice(i,1);
+          break;
+        }
+      }
+    },
+    updateProduct(state, product){
+      let id = product.id;
+      let productInfoToUpdate = product.productToUpdate;
+      for(let i = 0; i < state.products.length; i++){
+        if(state.products[i].id == id){
+          state.products[i].title = productInfoToUpdate.title;
+          state.products[i].shortDesc = productInfoToUpdate.shortDesc;
+          state.products[i].longDesc = productInfoToUpdate.longDesc;
+          state.products[i].imgFile = productInfoToUpdate.imgFile;
+          state.products[i].category = productInfoToUpdate.category;
+          state.products[i].price = productInfoToUpdate.price;
+          break;
+        }
+      }
     }
   },
   actions: {
+    /**
+     * Fiiiixaaaa
+     */
     async getItems(context, query) {
       if (
         !context.state.products.find((product) => product.category == query)
@@ -117,7 +164,13 @@ export default new Vuex.Store({
     },
     async generateOrder(context, order){
       context
-      await api.addOrder(order);
+      let response = await api.addOrder(order);
+      if (response >= 300) {
+        context.commit("modifyOrderSuccessStatus", false);
+      } else {
+        context.commit("modifyOrderSuccessStatus", true);
+      }
+      
     },
     async getOrders(context){
       let request = await api.getOrders();
@@ -131,20 +184,50 @@ export default new Vuex.Store({
       context.commit('saveProductById', request.data);
     },
     //admin uppdatera api gör en fetch
-    async updateProductsAPI(context, productBody){
-      console.log(productBody);
-      await api.updateProductById(productBody,context.state.adminProduct.post.id);
+    async updateProductsAPI(context, productData){  
+      let response = await api.updateProductById(productData.productToUpdate,productData.id);
+      if(response < 300){
+        context.commit('updateProduct' ,productData);
+      }
+    },
+    clearCart(context){
+      context.commit('clearTheCart');
+    },
+    async deleteProduct(context, productId){
+      await api.deleteProduct(productId);
+      context.commit("removeProduct", productId);
+    },
+    async uploadFile(context, productData){
+      const formData = new FormData()
+      formData.append("imgFile",productData.imgFile);
+      productData.imgFile = productData.imgFile.name;
+      formData.append("name", productData.imgFile.name);
+      await api.addImage(formData);
+      let newProduct = await api.addProduct(productData);
+      context.commit("updateProducts", newProduct.data);
+    },
+    async updateOrderState(context, orderObj){
+      context
+      await api.updateOrder(orderObj);
     }
+
   },
   getters: {
     filterProducts(state) {
       return function (category) {
-        console.log(category)
+        //console.log(category)
         return state.products.filter(
           (products) => products.category == category
         );
       };
     },
+    // findCategory(state) {
+    //   return function (category) {
+    //     return state.products.find(
+    //       (products) => products.category == category
+    //     );
+    //   };
+    // },
     cart(state) {
       return state.inCart.map((cartItem) => ({
         ...state.products.find((product) => product.id == cartItem.id),
