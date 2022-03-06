@@ -1,7 +1,7 @@
 <template>
   <div class="product-wrapper">
     <article v-for="product in Allproducts" :key="product.id">
-      <ProductCard :product="product" @sendCurrentProduct="sendProduct" />
+      <ProductCard :product="product" @sendCurrentProduct="sendProduct" @closeModal="closeModal"/>
     </article>
   </div>
 </template>
@@ -14,6 +14,9 @@ export default {
     sendProduct(product) {
       this.$emit("sendCurrentProduct", product);
     },
+    closeModal(){
+      this.$emit("closeModal");
+    }
   },
   computed: {
     Allproducts() {

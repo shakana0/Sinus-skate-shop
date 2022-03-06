@@ -68,11 +68,12 @@
                 <p class="login-status" v-else>Log in/register</p>
             </button>    
             <button @click="toogleCartModal">
+                <p v-if="getCartCount" class="cart-counter">{{getCartCount}}</p>
                 <span class="material-icons"> shopping_cart </span>
             </button>
         </div>
         <Overlay  v-if="showCartModal" :show="showModal" @closeModal="closeModal">
-          <ShoppingBag class="cart-modal"/>
+          <ShoppingBag class="cart-modal" @closeModal="closeModal"/>
           <!-- <ShoppingBag v-if="showCartModal" class="cart-modal"/> -->
         </Overlay>
         <Overlay v-if="showLogInModal && !loggedIn" :show="showModal" @closeModal="closeModal">
@@ -117,11 +118,30 @@ export default {
             this.showModal = false;
             this.showLogInModal = false
             this.showCartModal = false
+        },
+        getSumInCart(cart){
+          console.log(cart);
+          let sum = 0;
+          cart.forEach(cartItem => {
+            sum += cartItem.amount;
+          });
+          console.log(sum);
+          return sum;
         }
     },
     computed: {
         loggedIn() {
             return Object.keys(this.$store.state.user).includes('email')
+        },
+        getCartCount(){
+          let cart = this.$store.state.inCart;
+          //console.log(cart);
+          if(cart.length > 0){
+            return this.getSumInCart(cart);
+          }
+          else{
+            return 0;
+          }
         }
     }
 }
@@ -234,6 +254,11 @@ button {
 .login-status {
     color: white;
     font-size: 0.6rem;
+}
+.cart-counter{
+  color: white;
+  font-size: 0.55rem;
+  font-weight: 900;
 }
 
 </style>

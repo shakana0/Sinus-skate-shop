@@ -1,99 +1,145 @@
 <template>
   <main>
+    <div class="loggout-container">
+      <button @click="logout">Log out</button>
+    </div>
     <h2>YOUR INFORMATION</h2>
     <section v-if="getUserData.role == 'admin'">
       <button @click="showOrders">Orders</button>
       <button @click="showProducts">Products</button>
-      <p>{{ getUserData.role }}</p>
+      <h3>{{ getUserData.role }}</h3>
     </section>
 
     <!-- admin sida -->
     
-    <section v-if="isProducts">
-    <label>Enter id:
-      <input type="number" placeholder="product id" v-model="productId">
-    </label>
-    <button @click="getProduct">Get product</button>
-      <form v-if="getAdminProduct" @submit.prevent="updateProduct">
-        <input type="text" v-model="getAdminProduct.title">
-        <input type="text" v-model="getAdminProduct.shortDesc">
-        <input type="text" v-model="getAdminProduct.longDesc">
-        <input type="text" v-model="getAdminProduct.imgFile">
-        <!-- <input type="text" v-model="getAdminProduct.category"> -->
-        <select v-model="getAdminProduct.category">
+    <section class="products-wrapper" v-if="isProducts">
+      <div class="container-delete-update">
+        <label>Enter id:
+          <input type="number" placeholder="product id" v-model="productId">
+        </label>
+        <button class="smaller-button" @click="getProduct">Get product</button>
+        <button class="smaller-button" @click="deleteProduct">Delete Product</button>
+        <form class="update-product" v-if="getAdminProduct" @submit.prevent="updateProduct">
+          <label>Title</label>
+          <input type="text" v-model="getAdminProduct.title">
+          <label>Short description</label>
+          <input type="text" v-model="getAdminProduct.shortDesc">
+          <label>Long description</label>  
+          <input type="text" v-model="getAdminProduct.longDesc">
+          <label>Product picture file</label>
+          <input type="text" v-model="getAdminProduct.imgFile">
+          <label>Category</label>
+          <select v-model="getAdminProduct.category">
+            <option value="skateboard">Skateboard</option>
+            <option value="wheels">Wheels</option>
+            <option value="cap">Cap</option>
+            <option value="hoodie">Hoodie</option>
+            <option value="socks">Socks</option>
+            <option value="tshirt">T-shirt</option>
+            <option value="totebag">Totebag</option>
+          </select> 
+          <label>Price</label>
+          <input type="text" v-model="getAdminProduct.price">
+          <button class="update-product smaller-button">Update product</button>
+        </form>
+      </div>
+
+      <form class="create-product-form" @submit.prevent="addProduct">
+        <p>Create Product</p>
+        <label>Title</label>
+        <input type="text" placeholder="Title" required v-model="title">
+        <label>Short description</label>
+        <input type="text" placeholder="Short desc" required v-model="shortDesc">
+        <label>Long description</label>
+        <input type="text" placeholder="Long desc" required v-model="longDesc">
+        <label>Product picture file</label>
+        <!-- <input type="file" required @change="addFile"> -->
+        <input type="file" required ref=addFile>
+        <label>Category</label>
+        <select required v-model="category">
           <option value="skateboard">Skateboard</option>
-          <option value="wheels">Wheels</option>
+          <option value="wheel">Wheels</option>
           <option value="cap">Cap</option>
           <option value="hoodie">Hoodie</option>
           <option value="socks">Socks</option>
           <option value="tshirt">T-shirt</option>
           <option value="totebag">Totebag</option>
         </select>
-        <input type="text" v-model="getAdminProduct.price">
-        <button class="update-product">Update product</button>
-      </form>
-      <p v-if="getAdminProduct">{{getAdminProduct.title}}</p>
-      <p>Products view</p>
+        <label>Price</label>
+        <input type="text" placeholder="price" required v-model="price">
+        <button class="update-product smaller-button">Add Product</button>
+      </form>  
+      <!-- <p v-if="getAdminProduct">{{getAdminProduct.title}}</p> -->
     </section>
 
     <!-- admin och användarsida -->
-    <div class="wrapper" v-if="getUserData.role == 'cutomer' || isOrder">
-      <section>
-        <div class="info">
+    <div class="info-wrapper" v-if="getUserData.role == 'cutomer' || isOrder">
+      <section class="user-info-container">
+        <div class="info name">
           <p>Name:</p>
           <p>{{ getUserData.name }}</p>
         </div>
-        <div class="info">
-          <p>Email</p>
+        <div class="info email">
+          <p>Email:</p>
           <p>{{ getUserData.email }}</p>
         </div>
-        <div class="info">
-          <p>City</p>
+        <div class="info city">
+          <p>City:</p>
           <p>{{ getUserData.address.city }}</p>
         </div>
-        <div class="info">
-          <p>Street</p>
+        <div class="info street">
+          <p>Street:</p>
           <p>{{ getUserData.address.street }}</p>
         </div>
-        <div class="info">
-          <p>Zip</p>
+        <div class="info zip">
+          <p>Zip:</p>
           <p>{{ getUserData.address.zip }}</p>
         </div>
       </section>
-      <article v-for="order in getOrders" :key="order.id">
-        <div class="info">
-          <p>Created At:</p>
-          <p>{{ order.createdAt }}</p>
-        </div>
-        <div class="info">
-          <p>Order Status:</p>
-          <p>{{ order.status }}</p>
-        </div>
-        <div>
-          <p>Ordernumber:</p>
-          <p>{{ order.id }}</p>
-        </div>
-        <h3>Order History</h3>
-        <section v-for="item in order.items" :key="item.id">
-          <div class="line"></div>
-          <div>
-            <p>Article Number:</p>
-            <p>{{ item.ProductId }}</p>
+      <h3 class="history">Order History</h3>
+      <div class="order-container">
+        <article class="order" v-for="order in getOrders" :key="order.id">
+          <div class="info">
+            <p>Created At:</p>
+            <p>{{ order.createdAt }}</p>
           </div>
-          <div class="line"></div>
-          <div>
-            <p>Price:</p>
-            <p>{{ item.price }}</p>
+          <div class="info order-status-container">
+            <p>Order Status:</p>
+            <p>{{ order.status }}</p>
+            <div v-if="getUserData.role == 'admin'" class="update-status-container">
+              <select v-model="status">
+                <option>inProcess</option>
+                <option>shipped</option>
+                <option>canceled</option>
+              </select>
+              <button class="update-status-button" @click="updateStatus(order.id)">Update status</button>
+            </div>
+            
           </div>
-          <div class="line"></div>
-          <div>
-            <p>Amount:</p>
-            <p>{{ item.amount }}</p>
+          <div class="order-number">
+            <p>Ordernumber:</p>
+            <p>{{ order.id }}</p>
           </div>
-        </section>
-      </article>
+          <section class="items-container" v-for="item in order.items" :key="item.id">
+            <div class="line"></div>
+            <div>
+              <p>Article Number:</p>
+              <p>{{ item.ProductId }}</p>
+            </div>
+            <div class="line"></div>
+            <div>
+              <p>Price:</p>
+              <p>{{ item.price }}</p>
+            </div>
+            <div class="line"></div>
+            <div>
+              <p>Amount:</p>
+              <p>{{ item.amount }}</p>
+            </div>
+          </section>
+        </article>
+      </div> 
     </div>
-    <button @click="logout">Log out</button>
   </main>
 </template>
 
@@ -101,9 +147,16 @@
 export default {
   data() {
     return {
+      status : null,
       isOrder: true,
       isProducts: false,
-      productId : ""
+      productId : "",
+      title : "",
+      shortDesc : "",
+      longDesc : "",
+      category :"",
+      file: "",
+      price: null
     };
   },
   computed: {
@@ -135,18 +188,48 @@ export default {
       this.$store.dispatch("getProductWithId", this.productId);
       console.log()
     },
+    deleteProduct(){
+      this.$store.dispatch("deleteProduct", this.productId);
+    },
     // admin
     updateProduct(){
       let temp = this.getAdminProduct;
-      let productToUpdate = {
-        title: temp.title,
-        shortDesc:temp.shortDesc,
-        longDesc:temp.longDesc,
-        imgFile:temp.imgFile,
-        category:temp.category,
-        price:temp.price
+      console.log(this.productId);
+      let productData = {
+        id: this.productId,
+        productToUpdate:{
+          title: temp.title,
+          shortDesc:temp.shortDesc,
+          longDesc:temp.longDesc,
+          imgFile:temp.imgFile,
+          category:temp.category,
+          price:temp.price
+        }
       }
-      this.$store.dispatch('updateProductsAPI', productToUpdate);
+      this.$store.dispatch('updateProductsAPI', productData);
+    },
+    addFile(event){
+      this.file = event.target.files;
+    },
+    addProduct(){
+      const newProductData ={
+        title: this.title,
+        shortDesc: this.shortDesc,
+        longDesc: this.longDesc,
+        imgFile: this.$refs.addFile.files[0],
+        category: this.category,
+        price: this.price
+      }
+      this.$store.dispatch('uploadFile', newProductData);   
+    },
+    updateStatus(id){
+      console.log(id);
+      const obj = {
+        id: id,
+        status: this.status
+      }
+      this.$store.dispatch('updateOrderState',obj);
+      console.log(this.status);
     }
   },
   created() {
@@ -164,11 +247,98 @@ export default {
 
 <style scoped lang="scss">
 main {
+  .loggout-container{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  h2{
+    margin: 2rem;
+    font-size: 2rem;
+  }
+  section{
+    button{
+      width: 150px;;
+      margin: 1.5rem;
+    }
+    h3{
+      font-size: 1.2rem;
+      font-weight: normal;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 1rem;
+      margin-top: 2rem;
+
+    }
+  }
+  padding: 4rem 5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  .info-wrapper{
+    display: flex;
+    flex-direction: column;
+    .user-info-container{
+      margin-top:3rem;
+      align-self: center;
+      max-width: 50%;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-template-rows: repeat(3,1fr);
+      grid-template-areas:
+      "email email"
+      "name city"
+      "street zip";
+      gap: 1rem 2rem;
+    }
+    .info{
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid black;
+      p{
+        margin: 0.4rem;
+      }
+    }
+    .email{
+      grid-area: email;
+    }
+    .name{
+      grid-area: name;
+    }
+    .city{
+      grid-area: city;
+    }
+    .street{
+      grid-area: street;
+    }
+    .zip{
+      grid-area: zip;
+    }
+  }
+  .history{
+    text-align: center;
+    margin: 3rem;
+    font-size: 1.5rem;
+  }
+  .order-container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 4rem;
+    margin-bottom: 4rem;
 
+    .order{
+      border-radius: 0.5rem;
+      padding: 2rem;
+      border: 1px solid black;
+    }
+    .order-number{
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem;
+      margin-top: 2rem;
+    }
+  }
   button {
     background-color: #df0000;
     text-align: center;
@@ -201,7 +371,7 @@ article {
       font-weight: 600;
     }
   }
-
+  
   section {
     margin-bottom: 2rem;
     .line {
@@ -220,5 +390,55 @@ article {
       }
     }
   }
+  .items-container{
+    margin-bottom: 0;
+  }
 }
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 15rem;
+    label {
+      margin-top: 0.5rem;
+    }
+}
+.order-status-container{
+  display: flex;
+  align-items: center;
+}
+.update-status-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .update-status-button{
+    font-size: 0.8rem;
+    margin: 0rem;
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.5rem;
+  }
+  select{
+    padding: 0.2rem;
+  }
+}
+.products-wrapper{
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  .container-delete-update{
+    label,input{
+      margin-right: 5rem;
+      justify-self: center;
+    }
+  }
+}
+.smaller-button{
+  font-size: 0.8rem;
+  padding: 0.5rem 0.5rem;
+  margin: 1rem 0.5rem;
+}
+input,select{
+  padding: 0.2rem;
+  font-size: 1rem;
+}
+
 </style>
