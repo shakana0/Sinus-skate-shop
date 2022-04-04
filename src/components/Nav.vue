@@ -1,6 +1,7 @@
 <template>
     <nav>
         <div class="products-nav">
+          <!-- $FEEDBACK: Avoid inline logic, abstract to method instead -->
             <button class="menu-btn" 
             @click="
             if(!skateMenu)
@@ -11,6 +12,10 @@
                 Skate <span>&#x25BC;</span>
             </button>
             <div class="drop-menu skate" v-if="skateMenu" @click="skateMenu=false">
+              <!-- 
+                $FEEDBACK: When binding to-prop to router-links, use computed props,
+                the less javascript in templates the better
+               -->
                 <router-link :to="{path:'/Products', 
                 query:{Category:'Skateboard'}}" class="product-link">
                 Skateboards
@@ -31,6 +36,7 @@
                 Apparel <span>&#x25BC;</span>
             </button>
             <div class="drop-menu apparel" v-if="apparelMenu" @click="apparelMenu=false">
+              <!-- $FEEDBACK: This is better solved with v-for -->
                 <router-link :to="{path:'/Products', 
                 query:{Category:'Hoodie'}}" 
                 class="product-link">
