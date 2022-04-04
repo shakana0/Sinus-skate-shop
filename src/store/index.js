@@ -134,6 +134,7 @@ export default new Vuex.Store({
       }
     },
     //kanske flytta till mutations//
+    // $COMMENT: Yes
     
     addToCart(context, product) {
       const cart = context.state.inCart.find(

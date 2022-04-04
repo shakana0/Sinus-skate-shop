@@ -56,6 +56,7 @@ export default {
     };
   },
   methods: {
+    // $QUESTION: What happends with names with multiple spaces? Like "Gunnar Holmberg Svan"?
     destructName(name) {
       let destrcutedName = name.split(" ");
       this.firstName = destrcutedName[0];

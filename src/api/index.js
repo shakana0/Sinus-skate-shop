@@ -11,6 +11,7 @@ export async function getItems(category){
 }
 
 export async function regiserUser(userRegistrationData){
+  // $FEEDBACK: Don't mix async/await with .then/.catch
     return await axios.post('/register/', userRegistrationData)
         .then((response) => {  
             return response.status

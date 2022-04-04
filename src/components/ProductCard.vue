@@ -1,5 +1,6 @@
 <template>
   <article class="product" @click="$emit('sendCurrentProduct', product)">
+    <!-- $TIPS: Move 'http://localhost:5000' to an environment variable-->
     <img
       class="product-image"
       :class="product.category"
